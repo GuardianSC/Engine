@@ -1,19 +1,18 @@
 #pragma once
 
+
 class Input
 {
-	Input() : isInitialized(false) {}
-	bool isInitialized;
-
+	bool isInit;
 	float keyRelease[400];
 	float keyPress[400];
-	bool keyState[400];
-	bool mouseState[10];
+	bool  keyState[400];
 
 	float mouseRelease[10];
 	float mousePress[10];
+	bool  mouseState[10];
 
-
+	Input::Input() : isInit(false) { }
 
 	float mouseX, mouseY;
 public:
@@ -21,16 +20,21 @@ public:
 
 	bool init();
 	bool step();
-	void term();
+	void term() { }
 
-	bool getKey(unsigned, float threshold = 0); // True if key is down
-	bool getKeyPress(unsigned); // True on frame key is pressed
-	bool getKeyReleased(unsigned); // True on frame key is released
+	// Based on the state of the input at the beginning of the frame
+	bool getKey(unsigned); // true if key is down
+	bool getKeyPress(unsigned); // true on frame when key is pressed
+	bool getKeyRelease(unsigned); // true on frame when key is released  
 
-	bool getMouse(unsigned); // True if key is down
-	bool getMousePress(unsigned); // True on frame key is pressed
-	bool getMouseReleased(unsigned); // True on frame key is released
+	bool getMouseButton(unsigned); // true if key is down
+	bool getMouseButtonPress(unsigned); // true on frame when key is pressed
+	bool getMouseButtonRelease(unsigned); // true on frame when key is released
+
+	float keyDelta(unsigned); // difference between last press and release
 
 	float getMouseX();
 	float getMouseY();
+
+	bool     isInitialized() { return isInit; }
 };

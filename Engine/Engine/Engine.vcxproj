@@ -146,10 +146,15 @@
   <ItemGroup>
     <ClInclude Include="..\..\mathLibrary\mathLibrary\collision.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Factory.h" />
+    <ClInclude Include="GCData.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="renderUtilities.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="RigidbodyDynamics.h" />
     <ClInclude Include="sfwdraw.h" />
+    <ClInclude Include="System.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="VMath.h" />

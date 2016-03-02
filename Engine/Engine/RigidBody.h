@@ -1,18 +1,17 @@
 #pragma once
 #include "VMath.h"
-#include "Transform.h"
+#include "GCData.h"
 
-class Rigidbody
+class Rigidbody : public GCData<Rigidbody>
 {
 public:
-	Vector2 velocity, acceleration, force, jerk;
-	float mass, drag;
+	float mass;
 
-	float angularVelocity, angularAcceleration, torque;
-	float angularDrag;
+	Vector2 velocity, acceleration, force, jerk;
+	float drag;
 
 	Rigidbody();
 	void addForce(const Vector2 &);
-	void addTorque(const Vector2 &);
-	void integrate(Transform *, float dt);
+
+	void integrate(class Transform *, float dt);
 };

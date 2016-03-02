@@ -1,20 +1,18 @@
 #pragma once
 #include "VMath.h"
 #include <list>
+#include "GCData.h"
 
-
-class Transform
+class Transform : public GCData<Transform>
 {
 	Transform *e_parent;
 	std::list<Transform*> e_children;
 	Vector2 position, scale;
 	float angle;
 	// Matrix3 local; Updates whenever a setter is used
-
 public:
 	Transform();
 	~Transform();
-
 	//Matrix4 version to use with drawing.
 	Matrix3 getGlobalTransform() const;
 
@@ -27,6 +25,6 @@ public:
 	Vector2 getScale() const;
 	float   getAngle() const;
 
-	Vector2 getRight() const;
-	Vector2 getUp() const;
+	Vector2 getRight()     const;
+	Vector2 getUp()        const;
 };

@@ -67,31 +67,8 @@ double length(Vector4 &a) { return sqrtf((a.x * a.x) + (a.y * a.y) + (a.z * a.z)
 
 #pragma endregion
 
-#pragma region "Reflection"
-//Vector4 reflectionX(const Vector4 &a) { return(Vector4(-a.x, a.y, a.z, a.w)); }
-//
-//Vector4 reflectionY(const Vector4 &a) { return (Vector4(a.x, -a.y, a.z, a.w)); }
-//
-//Vector4 reflectionZ(const Vector4 &a) { return (Vector4(a.x, a.y, -a.z, a.w)); }
-//
-//Vector4 reflectionW(const Vector4 &a) { return (Vector4(a.x, a.y, a.z, -a.w)); }
-//
-//Vector4 reflectionXY(const Vector4 &a) { return (Vector4(-a.x, -a.y, a.z, a.w)); }
-//
-//Vector4 reflectionXZ(const Vector4 &a) { return (Vector4(-a.x, a.y, -a.z, a.w)); }
-//
-//Vector4 reflectionXW(const Vector4 &a) { return (Vector4(-a.x, a.y, a.z, -a.w)); }
-//
-//Vector4 reflectionYZ(const Vector4 &a) { return (Vector4(a.x, -a.y, -a.z, a.w)); }
-//
-//Vector4 reflectionYW(const Vector4 &a) { Vector4(a.x, -a.y, a.z, -a.w); }
-//
-//Vector4 reflectionZW(const Vector4 &a) { Vector4(a.x, a.y, -a.z, -a.w); }
-//
-//Vector4 reflection(const Vector4 &a) { return (Vector4(-a.x, -a.y, -a.z, a.w)); }
-
 Vector4 reflection(Vector4 a, Vector4 r)
 {
 	r = ((a - r) * normal(a) * (dot(normal(a), a)));
+	return r;
 }
-#pragma endregion
