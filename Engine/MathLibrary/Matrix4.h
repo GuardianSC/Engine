@@ -39,35 +39,35 @@ struct Matrix4
 		Matrix4 iR;
 		Matrix4 m;
 
-		float d = ((r.v[0] * r.v[5] * r.v[10] * r.v[15]) + (r.v[0] * r.v[6] * r.v[11] * r.v[13]) + (r.v[0] * r.v[7] * r.v[9]  * r.v[14])  + 
-		 	       (r.v[1] * r.v[4] * r.v[11] * r.v[14]) + (r.v[1] * r.v[6] * r.v[8]  * r.v[15]) + (r.v[1] * r.v[7] * r.v[10] * r.v[12])  + 
-			       (r.v[2] * r.v[4] * r.v[9]  * r.v[15]) + (r.v[2] * r.v[5] * r.v[11] * r.v[12]) + (r.v[2] * r.v[7] * r.v[8]  * r.v[13])  + 
-			       (r.v[3] * r.v[4] * r.v[10] * r.v[13]) + (r.v[3] * r.v[5] * r.v[8]  * r.v[14]) + (r.v[3] * r.v[6] * r.v[9]  * r.v[12])  -
-			       (r.v[0] * r.v[5] * r.v[11] * r.v[14]) - (r.v[0] * r.v[6] * r.v[9]  * r.v[15]) - (r.v[0] * r.v[7] * r.v[10] * r.v[13])  -
-			       (r.v[1] * r.v[4] * r.v[10] * r.v[15]) - (r.v[1] * r.v[6] * r.v[11] * r.v[12]) - (r.v[1] * r.v[7] * r.v[8]  * r.v[14])  -
-				   (r.v[2] * r.v[4] * r.v[11] * r.v[13]) - (r.v[2] * r.v[5] * r.v[8]  * r.v[15]) - (r.v[2] * r.v[7] * r.v[9]  * r.v[12])  -
-				   (r.v[3] * r.v[4] * r.v[9]  * r.v[14]) - (r.v[3] * r.v[5] * r.v[10] * r.v[12]) - (r.v[3] * r.v[6] * r.v[8]  * r.v[13])); // Determinant
+		float d = ((r.v[0] * r.v[5] * r.v[10] * r.v[15]) + (r.v[0] * r.v[6] * r.v[11] * r.v[13]) + (r.v[0] * r.v[7] * r.v[9] * r.v[14]) +
+			(r.v[1] * r.v[4] * r.v[11] * r.v[14]) + (r.v[1] * r.v[6] * r.v[8] * r.v[15]) + (r.v[1] * r.v[7] * r.v[10] * r.v[12]) +
+			(r.v[2] * r.v[4] * r.v[9] * r.v[15]) + (r.v[2] * r.v[5] * r.v[11] * r.v[12]) + (r.v[2] * r.v[7] * r.v[8] * r.v[13]) +
+			(r.v[3] * r.v[4] * r.v[10] * r.v[13]) + (r.v[3] * r.v[5] * r.v[8] * r.v[14]) + (r.v[3] * r.v[6] * r.v[9] * r.v[12]) -
+			(r.v[0] * r.v[5] * r.v[11] * r.v[14]) - (r.v[0] * r.v[6] * r.v[9] * r.v[15]) - (r.v[0] * r.v[7] * r.v[10] * r.v[13]) -
+			(r.v[1] * r.v[4] * r.v[10] * r.v[15]) - (r.v[1] * r.v[6] * r.v[11] * r.v[12]) - (r.v[1] * r.v[7] * r.v[8] * r.v[14]) -
+			(r.v[2] * r.v[4] * r.v[11] * r.v[13]) - (r.v[2] * r.v[5] * r.v[8] * r.v[15]) - (r.v[2] * r.v[7] * r.v[9] * r.v[12]) -
+			(r.v[3] * r.v[4] * r.v[9] * r.v[14]) - (r.v[3] * r.v[5] * r.v[10] * r.v[12]) - (r.v[3] * r.v[6] * r.v[8] * r.v[13])); // Determinant
 
 		bool dPass = false;
 		if (d != 0) { dPass = true; } // If determinant does not equal zero, there is a matrix
 		if (dPass = true)
 		{
 			iR.c[0] = Vector4((r.v[5] * r.v[10] * r.v[15]) + (r.v[6] * r.v[11] * r.v[13]) + (r.v[7] * r.v[9] * r.v[14]) - (r.v[5] * r.v[11] * r.v[14]) - (r.v[6] * r.v[9] * r.v[15]) - (r.v[7] * r.v[10] * r.v[13]),
-							  (r.v[1] * r.v[11] * r.v[14]) + (r.v[2] * r.v[9] * r.v[15]) + (r.v[3] * r.v[10] * r.v[13]) - (r.v[1] * r.v[10] * r.v[15]) - (r.v[2] * r.v[11] * r.v[13]) - (r.v[3] * r.v[9] * r.v[14]),
-							  (r.v[1] * r.v[6] * r.v[15]) + (r.v[2] * r.v[7] * r.v[13]) + (r.v[3] * r.v[5] * r.v[14]) - (r.v[1] * r.v[7] * r.v[14]) - (r.v[2] * r.v[5] * r.v[15]) - (r.v[3] * r.v[6] * r.v[13]),
-							  (r.v[1] * r.v[7] * r.v[10]) + (r.v[2] * r.v[5] * r.v[11]) + (r.v[3] * r.v[6] * r.v[9]) - (r.v[1] * r.v[6] * r.v[11]) - (r.v[2] * r.v[7] * r.v[9]) - (r.v[3] * r.v[5] * r.v[10]));
+				(r.v[1] * r.v[11] * r.v[14]) + (r.v[2] * r.v[9] * r.v[15]) + (r.v[3] * r.v[10] * r.v[13]) - (r.v[1] * r.v[10] * r.v[15]) - (r.v[2] * r.v[11] * r.v[13]) - (r.v[3] * r.v[9] * r.v[14]),
+				(r.v[1] * r.v[6] * r.v[15]) + (r.v[2] * r.v[7] * r.v[13]) + (r.v[3] * r.v[5] * r.v[14]) - (r.v[1] * r.v[7] * r.v[14]) - (r.v[2] * r.v[5] * r.v[15]) - (r.v[3] * r.v[6] * r.v[13]),
+				(r.v[1] * r.v[7] * r.v[10]) + (r.v[2] * r.v[5] * r.v[11]) + (r.v[3] * r.v[6] * r.v[9]) - (r.v[1] * r.v[6] * r.v[11]) - (r.v[2] * r.v[7] * r.v[9]) - (r.v[3] * r.v[5] * r.v[10]));
 			iR.c[1] = Vector4((r.v[4] * r.v[11] * r.v[14]) + (r.v[6] * r.v[8] * r.v[15]) + (r.v[7] * r.v[10] * r.v[12]) - (r.v[4] * r.v[10] * r.v[15]) - (r.v[6] * r.v[11] * r.v[12]) - (r.v[7] * r.v[8] * r.v[14]),
-							  (r.v[0] * r.v[10] * r.v[15]) + (r.v[2] * r.v[11] * r.v[12]) + (r.v[3] * r.v[8] * r.v[14]) - (r.v[0] * r.v[11] * r.v[14]) - (r.v[2] * r.v[8] * r.v[15]) - (r.v[3] * r.v[10] * r.v[12]),
-							  (r.v[0] * r.v[7] * r.v[14]) + (r.v[2] * r.v[4] * r.v[15]) + (r.v[3] * r.v[6] * r.v[12]) - (r.v[0] * r.v[6] * r.v[15]) - (r.v[2] * r.v[7] * r.v[12]) - (r.v[3] * r.v[4] * r.v[14]),
-							  (r.v[0] * r.v[6] * r.v[11]) + (r.v[2] * r.v[7] * r.v[8]) + (r.v[3] * r.v[4] * r.v[10]) - (r.v[0] * r.v[7] * r.v[10]) - (r.v[2] * r.v[4] * r.v[11]) - (r.v[3] * r.v[6] * r.v[8]));
+				(r.v[0] * r.v[10] * r.v[15]) + (r.v[2] * r.v[11] * r.v[12]) + (r.v[3] * r.v[8] * r.v[14]) - (r.v[0] * r.v[11] * r.v[14]) - (r.v[2] * r.v[8] * r.v[15]) - (r.v[3] * r.v[10] * r.v[12]),
+				(r.v[0] * r.v[7] * r.v[14]) + (r.v[2] * r.v[4] * r.v[15]) + (r.v[3] * r.v[6] * r.v[12]) - (r.v[0] * r.v[6] * r.v[15]) - (r.v[2] * r.v[7] * r.v[12]) - (r.v[3] * r.v[4] * r.v[14]),
+				(r.v[0] * r.v[6] * r.v[11]) + (r.v[2] * r.v[7] * r.v[8]) + (r.v[3] * r.v[4] * r.v[10]) - (r.v[0] * r.v[7] * r.v[10]) - (r.v[2] * r.v[4] * r.v[11]) - (r.v[3] * r.v[6] * r.v[8]));
 			iR.c[2] = Vector4((r.v[4] * r.v[9] * r.v[15]) + (r.v[5] * r.v[11] * r.v[12]) + (r.v[7] * r.v[8] * r.v[13]) - (r.v[4] * r.v[11] * r.v[13]) - (r.v[5] * r.v[8] * r.v[15]) - (r.v[7] * r.v[9] * r.v[12]),
-							  (r.v[0] * r.v[11] * r.v[13]) + (r.v[1] * r.v[8] * r.v[15]) + (r.v[3] * r.v[9] * r.v[12]) - (r.v[0] * r.v[9] * r.v[15]) - (r.v[1] * r.v[11] * r.v[12]) - (r.v[3] * r.v[8] * r.v[13]),
-							  (r.v[0] * r.v[5] * r.v[15]) + (r.v[1] * r.v[7] * r.v[12]) + (r.v[3] * r.v[4] * r.v[13]) - (r.v[0] * r.v[7] * r.v[13]) - (r.v[1] * r.v[4] * r.v[15]) - (r.v[3] * r.v[5] * r.v[12]),
-							  (r.v[0] * r.v[7] * r.v[9]) + (r.v[1] * r.v[4] * r.v[11]) + (r.v[3] * r.v[5] * r.v[8]) - (r.v[0] * r.v[5] * r.v[11]) - (r.v[1] * r.v[7] * r.v[8]) - (r.v[3] * r.v[4] * r.v[9]));
+				(r.v[0] * r.v[11] * r.v[13]) + (r.v[1] * r.v[8] * r.v[15]) + (r.v[3] * r.v[9] * r.v[12]) - (r.v[0] * r.v[9] * r.v[15]) - (r.v[1] * r.v[11] * r.v[12]) - (r.v[3] * r.v[8] * r.v[13]),
+				(r.v[0] * r.v[5] * r.v[15]) + (r.v[1] * r.v[7] * r.v[12]) + (r.v[3] * r.v[4] * r.v[13]) - (r.v[0] * r.v[7] * r.v[13]) - (r.v[1] * r.v[4] * r.v[15]) - (r.v[3] * r.v[5] * r.v[12]),
+				(r.v[0] * r.v[7] * r.v[9]) + (r.v[1] * r.v[4] * r.v[11]) + (r.v[3] * r.v[5] * r.v[8]) - (r.v[0] * r.v[5] * r.v[11]) - (r.v[1] * r.v[7] * r.v[8]) - (r.v[3] * r.v[4] * r.v[9]));
 			iR.c[3] = Vector4((r.v[4] * r.v[10] * r.v[13]) + (r.v[5] * r.v[8] * r.v[14]) + (r.v[6] * r.v[9] * r.v[12]) - (r.v[4] * r.v[9] * r.v[14]) - (r.v[5] * r.v[10] * r.v[12]) - (r.v[6] * r.v[8] * r.v[13]),
-							  (r.v[0] * r.v[9] * r.v[14]) + (r.v[1] * r.v[10] * r.v[12]) + (r.v[2] * r.v[8] * r.v[13]) - (r.v[0] * r.v[10] * r.v[13]) - (r.v[1] * r.v[8] * r.v[14]) - (r.v[2] * r.v[9] * r.v[12]),
-							  (r.v[0] * r.v[6] * r.v[13]) + (r.v[1] * r.v[4] * r.v[14]) + (r.v[2] * r.v[5] * r.v[12]) - (r.v[0] * r.v[5] * r.v[14]) - (r.v[1] * r.v[6] * r.v[12]) - (r.v[2] * r.v[4] * r.v[13]),
-							  (r.v[0] * r.v[5] * r.v[10]) + (r.v[1] * r.v[6] * r.v[8]) + (r.v[2] * r.v[4] * r.v[9]) - (r.v[0] * r.v[6] * r.v[9]) - (r.v[1] * r.v[4] * r.v[10]) - (r.v[2] * r.v[5] * r.v[8]));
+				(r.v[0] * r.v[9] * r.v[14]) + (r.v[1] * r.v[10] * r.v[12]) + (r.v[2] * r.v[8] * r.v[13]) - (r.v[0] * r.v[10] * r.v[13]) - (r.v[1] * r.v[8] * r.v[14]) - (r.v[2] * r.v[9] * r.v[12]),
+				(r.v[0] * r.v[6] * r.v[13]) + (r.v[1] * r.v[4] * r.v[14]) + (r.v[2] * r.v[5] * r.v[12]) - (r.v[0] * r.v[5] * r.v[14]) - (r.v[1] * r.v[6] * r.v[12]) - (r.v[2] * r.v[4] * r.v[13]),
+				(r.v[0] * r.v[5] * r.v[10]) + (r.v[1] * r.v[6] * r.v[8]) + (r.v[2] * r.v[4] * r.v[9]) - (r.v[0] * r.v[6] * r.v[9]) - (r.v[1] * r.v[4] * r.v[10]) - (r.v[2] * r.v[5] * r.v[8]));
 
 			r * iR = m;
 
@@ -101,64 +101,68 @@ struct Matrix4
 		r.m[2][2] = xyz.z;
 		return r;
 	}
-};
 
 #pragma region "Operators"
-Matrix4 operator+(const Matrix4 &_A, const Matrix4 &b)
-{
-	Matrix4 temp;
-
-	// do a member-wise addition
-	for (int i = 0; i < 9; ++i)
+	Matrix4 operator+(const Matrix4 &b)
 	{
-		temp.v[i] = _A.v[i] + b.v[i];
+		Matrix4 temp;
+
+		// do a member-wise addition
+		for (int i = 0; i < 9; ++i)
+		{
+			temp.v[i] = this->v[i] + b.v[i];
+		}
+
+		return temp;
 	}
 
-	return temp;
-}
-
-Matrix4 operator-(const Matrix4 &_A, const Matrix4 &b)
-{
-	Matrix4 temp;
-
-	for (int i = 0; i < 9; ++i)
+	Matrix4 operator-(const Matrix4 &b)
 	{
-		temp.v[i] = _A.v[i] - b.v[i];
+		Matrix4 temp;
+
+		for (int i = 0; i < 9; ++i)
+		{
+			temp.v[i] = this->v[i] - b.v[i];
+		}
+
+		return temp;
 	}
 
-	return temp;
-}
-
-// Matrix Matrix multiplication
-Matrix4 operator*(const Matrix4 &_A, const Matrix4 &b)
-{
+	// Matrix Matrix multiplication
+	Matrix4 operator*(const Matrix4 &b)
 	{
-		//A can now access rows as vector4
-		Matrix4 r, A = _A.transpose();
+		{
+			//A can now access rows as vector4
+			Matrix4 r, A = this->transpose();
 
-		/*for (size_t i = 0; i < 3; ++i)
-		r.c[i] = Vector4(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));*/
-		r.c[0] = Vector4(dot(A.c[0], b.c[0]), dot(A.c[1], b.c[0]), dot(A.c[2], b.c[0]), dot(A.c[1], b.c[0]));
-		r.c[1] = Vector4(dot(A.c[0], b.c[1]), dot(A.c[1], b.c[1]), dot(A.c[2], b.c[1]), dot(A.c[3], b.c[1]));
-		r.c[2] = Vector4(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]), dot(A.c[3], b.c[2]));
-		r.c[3] = Vector4(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]), dot(A.c[3], b.c[3]));
+			/*for (size_t i = 0; i < 3; ++i)
+			r.c[i] = Vector4(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));*/
+			r.c[0] = Vector4(dot(A.c[0], b.c[0]), dot(A.c[1], b.c[0]), dot(A.c[2], b.c[0]), dot(A.c[1], b.c[0]));
+			r.c[1] = Vector4(dot(A.c[0], b.c[1]), dot(A.c[1], b.c[1]), dot(A.c[2], b.c[1]), dot(A.c[3], b.c[1]));
+			r.c[2] = Vector4(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]), dot(A.c[3], b.c[2]));
+			r.c[3] = Vector4(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]), dot(A.c[3], b.c[3]));
+
+			return r;
+		}
+	}
+
+	// Matrix Vector Multiplication
+	Vector4 operator*(const Vector4 &b)
+	{
+		Matrix4 A = this->transpose();
+		Vector4 r;
+
+		r.x = dot(A.c[0], b);
+		r.y = dot(A.c[1], b);
+		r.z = dot(A.c[2], b);
+		r.w = dot(A.c[3], b);
 
 		return r;
 	}
-}
-
-// Matrix Vector Multiplication
-Vector4 operator*(const Matrix4 &_A, const Vector4 &b)
-{
-	Matrix4 A = _A.transpose();
-	Vector4 r;
-
-	r.x = dot(A.c[0], b);
-	r.y = dot(A.c[1], b);
-	r.z = dot(A.c[2], b);
-	r.w = dot(A.c[3], b);
-
-	return r;
-	}
 
 #pragma endregion
+
+#pragma endregion
+
+};
+

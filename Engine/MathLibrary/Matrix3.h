@@ -24,7 +24,7 @@ struct Matrix3
 
 	static Matrix3 identity()
 	{
-		Matrix3 r;	
+		Matrix3 r;
 		r.c[0] = Vector3(1, 0, 0);
 		r.c[1] = Vector3(0, 1, 0);
 		r.c[2] = Vector3(0, 0, 1);
@@ -75,14 +75,66 @@ struct Matrix3
 		return r;
 	}
 
-	Matrix3 operator*( const Matrix3 &b)
+#pragma region "Operators"
+	Matrix3 operator+(const Matrix3 &b)
+	{
+		// create a temporary matrix to hold the result
+		Matrix3 temp;
+
+		// do a member-wise addition
+		for (int i = 0; i < 9; ++i)
+		{
+			temp.v[i] = this->v[i] + b.v[i];
+		}
+
+		return temp;
+	}
+
+	Matrix3 operator+=(const Matrix3 &b)
+	{
+		Matrix3 temp;
+
+		for (int i = 0; i < 9; ++i)
+		{
+			//temp.v[i] = _A.v[i] += b.v[i];
+		}
+
+		return temp;
+	}
+
+	Matrix3 operator-(const Matrix3 &b)
+	{
+		Matrix3 temp;
+
+		for (int i = 0; i < 9; ++i)
+		{
+			temp.v[i] = this->v[i] - b.v[i];
+		}
+
+		return temp;
+	}
+
+	Matrix3 operator-=(const Matrix3 &b)
+	{
+		Matrix3 temp;
+
+		for (int i = 0; i < 9; ++i)
+		{
+			//temp.v[i] = _A.v[i] -= b.v[i];
+		}
+
+		return temp;
+	}
+
+	// Matrix Matrix multiplication
+	Matrix3 operator*(const Matrix3 &b)
 	{
 		{
-			Matrix3 r;
-			Matrix3 A = this->transpose(); //A can now access rows as vector3
+			//A can now access rows as vector4
+			Matrix3 r, A = this->transpose();
 
-										/*for (size_t i = 0; i < 3; ++i)
-										r.c[i] = Vector3(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));*/
+			/*for (size_t i = 0; i < 3; ++i)
+			r.c[i] = Vector4(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));*/
 			r.c[0] = Vector3(dot(A.c[0], b.c[0]), dot(A.c[1], b.c[0]), dot(A.c[2], b.c[0]));
 			r.c[1] = Vector3(dot(A.c[0], b.c[1]), dot(A.c[1], b.c[1]), dot(A.c[2], b.c[1]));
 			r.c[2] = Vector3(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]));
@@ -90,89 +142,36 @@ struct Matrix3
 			return r;
 		}
 	}
-};
 
-#pragma region "Operators"
-Matrix3 operator+(const Matrix3 &_A, const Matrix3 &b) 
-{ 
-	// create a temporary matrix to hold the result
-	Matrix3 temp;
 
-	// do a member-wise addition
-	for (int i = 0; i < 9; ++i)
+	//Matrix3 operator*=(const Matrix3 &_A, const Matrix3 &b)
+	//{
+	//	{
+	//		//A can now access rows as vector3
+	//		Matrix3 r, A = _A.transpose();
+	//
+	//		/*for (size_t i = 0; i < 3; ++i)
+	//		r.c[i] = Vector3(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));*/
+	//		r.c[0] = Vector3(dot(A.c[0], b.c[0]), dot(A.c[1], b.c[0]), dot(A.c[2], b.c[0]));
+	//		r.c[1] = Vector3(dot(A.c[0], b.c[1]), dot(A.c[1], b.c[1]), dot(A.c[2], b.c[1]));
+	//		r.c[2] = Vector3(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]));
+	//
+	//		return r;
+	//	}
+	//}
+
+	//Matrix Vector Multiplication
+	Vector3 operator*(const Vector3 &b)
 	{
-		temp.v[i] = _A.v[i] + b.v[i];
+		Matrix3 A = this->transpose();
+		Vector3 r;
+
+		r.x = dot(A.c[0], b);
+		r.y = dot(A.c[1], b);
+		r.z = dot(A.c[2], b);
+
+		return r;
 	}
-
-	return temp;
-}
-
-Matrix3 operator+=(const Matrix3 &_A, const Matrix3 &b) 
-{ 
-	Matrix3 temp;
-
-	for (int i = 0; i < 9; ++i)
-	{
-		//temp.v[i] = _A.v[i] += b.v[i];
-	}
-
-	return temp;
-	}
-
-Matrix3 operator-(const Matrix3 &_A, const Matrix3 &b)
-{
-	Matrix3 temp;
-
-	for (int i = 0; i < 9; ++i)
-	{
-		temp.v[i] = _A.v[i] - b.v[i];
-	}
-
-	return temp;
-}
-
-Matrix3 operator-=(const Matrix3 &_A, const Matrix3 &b)
-{
-	Matrix3 temp;
-
-	for (int i = 0; i < 9; ++i)
-	{
-		//temp.v[i] = _A.v[i] -= b.v[i];
-	}
-
-	return temp;
-}
-
-// Matrix Matrix Multiplication
-
-
-//Matrix3 operator*=(const Matrix3 &_A, const Matrix3 &b)
-//{
-//	{
-//		//A can now access rows as vector3
-//		Matrix3 r, A = _A.transpose();
-//
-//		/*for (size_t i = 0; i < 3; ++i)
-//		r.c[i] = Vector3(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));*/
-//		r.c[0] = Vector3(dot(A.c[0], b.c[0]), dot(A.c[1], b.c[0]), dot(A.c[2], b.c[0]));
-//		r.c[1] = Vector3(dot(A.c[0], b.c[1]), dot(A.c[1], b.c[1]), dot(A.c[2], b.c[1]));
-//		r.c[2] = Vector3(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]));
-//
-//		return r;
-//	}
-//}
-
-//Matrix Vector Multiplication
-Vector3 operator*(const Matrix3 &_A, const Vector3 &b)
-{
-	Matrix3 A = _A.transpose();
-	Vector3 r;
-
-	r.x = dot(A.c[0], b);
-	r.y = dot(A.c[1], b);
-	r.z = dot(A.c[2], b);
-
-	return r;
-}
 
 #pragma endregion
+};

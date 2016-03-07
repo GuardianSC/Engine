@@ -74,5 +74,5 @@ Vector2 Transform::getRight() const
 
 Vector2 Transform::getUp() const
 {
-	//return perp(Vector2::fromAngle(angle));
+	/return perp(Vector2::fromAngle(angle));
 }

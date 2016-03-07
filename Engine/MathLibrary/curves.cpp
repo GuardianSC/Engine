@@ -1,9 +1,9 @@
-#pragma once
+#include "curves.h"
 #include "Vector2.h"
 #include "Vector3.h"
 
 /*
-    Could make an object to represent a chain of curves.
+Could make an object to represent a chain of curves.
 */
 
 Vector2 bezierQuad(const Vector2 &start, const Vector2 &cp1, const Vector2 &end, float t);

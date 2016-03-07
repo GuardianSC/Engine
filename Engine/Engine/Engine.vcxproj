@@ -144,8 +144,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\mathLibrary\mathLibrary\collision.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GCData.h" />
