@@ -13,7 +13,7 @@ struct Factory
         e->rigidbody = Rigidbody::make();
         e->transform = Transform::make();
 
-        e->collider->circle.radius = radius;
+        e->collider->circle.r = radius;
         e->collider->shape = Collider::e_CIRCLE;
         e->rigidbody->mass = mass;
         e->rigidbody->velocity = vel;

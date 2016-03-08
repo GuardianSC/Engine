@@ -1,4 +1,5 @@
 #include "Collider.h"
+#include "collision.h"
 #include "Transform.h"
 
 Collider::Collider() : shape(Collider::e_CIRCLE), circle({ { 0,0 },1 })
