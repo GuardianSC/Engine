@@ -13,7 +13,7 @@ struct Matrix4
 		Vector4 c[4];
 	};
 
-	Matrix4 transpose() const
+	inline Matrix4 transpose() const
 	{
 		Matrix4 r;
 		r.c[0] = Vector4(m[0][0], m[1][0], m[2][0], m[3][0]);
@@ -23,7 +23,7 @@ struct Matrix4
 		return r;
 	}
 
-	static Matrix4 identity()
+	inline static Matrix4 identity()
 	{
 		Matrix4 r;
 		r.c[0] = Vector4(1, 0, 0, 0);
@@ -33,7 +33,7 @@ struct Matrix4
 		return r;
 	}
 
-	static Matrix4 inverse() // Help from http://www.cg.info.hiroshima-cu.ac.jp/~miyazaki/knowledge/teche23.html
+	inline static Matrix4 inverse() // Help from http://www.cg.info.hiroshima-cu.ac.jp/~miyazaki/knowledge/teche23.html
 	{
 		Matrix4 r;
 		Matrix4 iR;
@@ -76,7 +76,7 @@ struct Matrix4
 	}
 
 	// angle, in degrees
-	static Matrix4 rotate(float angle)
+	inline static Matrix4 rotate(float angle)
 	{
 		Matrix4 r = identity();
 		r.c[0] = Vector4(cosf(angle), sinf(angle), 0, 0);
@@ -84,7 +84,7 @@ struct Matrix4
 		return r;
 	}
 
-	static Matrix4 scale(const Vector3 &xyz)
+	inline static Matrix4 scale(const Vector3 &xyz)
 	{
 		Matrix4 r = identity();
 		r.m[0][0] = xyz.x;
@@ -93,7 +93,7 @@ struct Matrix4
 		return r;
 	}
 
-	static Matrix4 translate(const Vector3 &xyz)
+	inline static Matrix4 translate(const Vector3 &xyz)
 	{
 		Matrix4 r = identity();
 		r.m[2][0] = xyz.x;
@@ -103,7 +103,7 @@ struct Matrix4
 	}
 
 #pragma region "Operators"
-	Matrix4 operator+(const Matrix4 &b)
+	inline Matrix4 operator+(const Matrix4 &b)
 	{
 		Matrix4 temp;
 
@@ -116,7 +116,7 @@ struct Matrix4
 		return temp;
 	}
 
-	Matrix4 operator-(const Matrix4 &b)
+	inline Matrix4 operator-(const Matrix4 &b)
 	{
 		Matrix4 temp;
 
@@ -129,7 +129,7 @@ struct Matrix4
 	}
 
 	// Matrix Matrix multiplication
-	Matrix4 operator*(const Matrix4 &b)
+	inline Matrix4 operator*(const Matrix4 &b)
 	{
 		{
 			//A can now access rows as vector4
@@ -147,7 +147,7 @@ struct Matrix4
 	}
 
 	// Matrix Vector Multiplication
-	Vector4 operator*(const Vector4 &b)
+	inline Vector4 operator*(const Vector4 &b)
 	{
 		Matrix4 A = this->transpose();
 		Vector4 r;
@@ -159,8 +159,6 @@ struct Matrix4
 
 		return r;
 	}
-
-#pragma endregion
 
 #pragma endregion
 

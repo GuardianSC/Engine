@@ -13,7 +13,7 @@ struct Matrix3
 
 	Matrix3() {}
 
-	Matrix3 transpose() const
+	inline Matrix3 transpose() const
 	{
 		Matrix3 r;
 		r.c[0] = Vector3(m[0][0], m[1][0], m[2][0]);
@@ -22,7 +22,7 @@ struct Matrix3
 		return r;
 	}
 
-	static Matrix3 identity()
+	inline static Matrix3 identity()
 	{
 		Matrix3 r;
 		r.c[0] = Vector3(1, 0, 0);
@@ -31,7 +31,7 @@ struct Matrix3
 		return r;
 	}
 
-	static Matrix3 inverse() // Help from http://www.cg.info.hiroshima-cu.ac.jp/~miyazaki/knowledge/teche23.html
+	inline static Matrix3 inverse() // Help from http://www.cg.info.hiroshima-cu.ac.jp/~miyazaki/knowledge/teche23.html
 	{
 		Matrix3 r, iR, m;
 		float d = ((r.v[0] * r.v[4] * r.v[8]) + (r.v[3] * r.v[7] * r.v[2]) + (r.v[6] * r.v[1] * r.v[5]) - (r.v[0] * r.v[7] * r.v[5]) - (r.v[6] * r.v[4] * r.v[2]) - (r.v[3] * r.v[1] * r.v[8])); // Determinant
@@ -51,7 +51,7 @@ struct Matrix3
 	}
 
 	// angle, in degrees
-	static Matrix3 rotate(float angle)
+	inline static Matrix3 rotate(float angle)
 	{
 		Matrix3 r = identity();
 		r.c[0] = Vector3(cosf(angle), sinf(angle), 0);
@@ -59,7 +59,7 @@ struct Matrix3
 		return r;
 	}
 
-	static Matrix3 scale(const Vector2 &xy)
+	inline static Matrix3 scale(const Vector2 &xy)
 	{
 		Matrix3 r = identity();
 		r.m[0][0] = xy.x;
@@ -67,7 +67,7 @@ struct Matrix3
 		return r;
 	}
 
-	static Matrix3 translate(const Vector2 &xy)
+	inline static Matrix3 translate(const Vector2 &xy)
 	{
 		Matrix3 r = identity();
 		r.m[2][0] = xy.x;
@@ -76,7 +76,7 @@ struct Matrix3
 	}
 
 #pragma region "Operators"
-	Matrix3 operator+(const Matrix3 &b)
+	inline Matrix3 operator+(const Matrix3 &b)
 	{
 		// create a temporary matrix to hold the result
 		Matrix3 temp;
@@ -90,7 +90,7 @@ struct Matrix3
 		return temp;
 	}
 
-	Matrix3 operator+=(const Matrix3 &b)
+	inline Matrix3 operator+=(const Matrix3 &b)
 	{
 		Matrix3 temp;
 
@@ -102,7 +102,7 @@ struct Matrix3
 		return temp;
 	}
 
-	Matrix3 operator-(const Matrix3 &b)
+	inline Matrix3 operator-(const Matrix3 &b)
 	{
 		Matrix3 temp;
 
@@ -114,7 +114,7 @@ struct Matrix3
 		return temp;
 	}
 
-	Matrix3 operator-=(const Matrix3 &b)
+	inline Matrix3 operator-=(const Matrix3 &b)
 	{
 		Matrix3 temp;
 
@@ -127,7 +127,7 @@ struct Matrix3
 	}
 
 	// Matrix Matrix multiplication
-	Matrix3 operator*(const Matrix3 &b)
+	inline Matrix3 operator*(const Matrix3 &b)
 	{
 		{
 			//A can now access rows as vector4
@@ -144,7 +144,7 @@ struct Matrix3
 	}
 
 
-	//Matrix3 operator*=(const Matrix3 &_A, const Matrix3 &b)
+	//inline Matrix3 operator*=(const Matrix3 &_A, const Matrix3 &b)
 	//{
 	//	{
 	//		//A can now access rows as vector3
@@ -161,7 +161,7 @@ struct Matrix3
 	//}
 
 	//Matrix Vector Multiplication
-	Vector3 operator*(const Vector3 &b)
+	inline Vector3 operator*(const Vector3 &b)
 	{
 		Matrix3 A = this->transpose();
 		Vector3 r;

@@ -3,19 +3,6 @@
 #include <cfloat>
 #include "Vector4.h"
 
-//Vector4::Vector4()
-//{
-//	float x, y, z, w;
-//
-//	Vector4() {}
-//	Vector4(float a_x, float a_y, float a_z, float a_w) : x(a_x), y(a_y), z(a_z), w(a_w) {}
-//
-//	float magnitude() const { return sqrtf(x*x + y*y + z*z + w*w); }
-//
-//	float lerp(float alpha, float start, float end) { (1 - alpha)*start + (alpha)*end; }
-//
-//};
-
 #pragma region "Operators"
 Vector4 operator+(const Vector4  &lhs, const Vector4 &rhs) { return Vector4(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w); }
 
@@ -65,10 +52,10 @@ double distance(Vector4 &a, Vector4 &b) { return sqrtf((b.x - a.x) * (b.x - a.x)
 
 double length(Vector4 &a) { return sqrtf((a.x * a.x) + (a.y * a.y) + (a.z * a.z) + (a.w * a.w)); }
 
-#pragma endregion
-
 Vector4 reflection(Vector4 a, Vector4 r)
 {
 	r = ((a - r) * normal(a) * (dot(normal(a), a)));
 	return r;
 }
+
+#pragma endregion

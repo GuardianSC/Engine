@@ -65,6 +65,8 @@ double distance(Vector4 &a, Vector4 &b);
 
 double length(Vector4 &a);
 
+Vector4 reflection(Vector4 a, Vector4 r);
+
 #pragma endregion
 
-Vector4 reflection(Vector4 a, Vector4 r);
+

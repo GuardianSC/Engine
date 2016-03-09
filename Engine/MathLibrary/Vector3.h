@@ -5,8 +5,8 @@
 
 struct Vector3
 {
+public:
 	float x, y, z;
-
 	Vector3() {}
 	Vector3(float a_x, float a_y, float a_z): x(a_x), y(a_y), z(a_z) {}
 
@@ -53,7 +53,8 @@ inline bool operator==(const Vector3 &lhs, const Vector3 &rhs);
 
 #pragma region "Miscellaneous"
 
-float dot(const Vector3 &a, const Vector3 &b);
+double dot(const Vector3 &v);
+double dot(const Vector3 &a, const Vector3 &b);
 
 //assert(magnitude() != 0 && "Divide by Zero");
 Vector3 normal(const Vector3 &a, float magnitude);
@@ -65,24 +66,9 @@ Vector3 scalar(const Vector3 &a, float s);
 Vector3 direction(Vector3 &a, Vector3 &b);
 
 double distance(Vector3 &a, Vector3 &b);
+
 double length(Vector3 &a);
 
-#pragma endregion
+Vector3 reflection(const Vector3 a, const Vector3 r);
 
-#pragma region "Reflection"
-//Vector3 reflectionX(const Vector3 &a) { return(Vector3(-a.x, a.y, a.z)); }
-//
-//Vector3 reflectionY(const Vector3 &a) { return (Vector3(a.x, -a.y, a.z)); }
-//
-//Vector3 reflectionZ(const Vector3 &a) { return (Vector3(a.x, a.y, -a.z)); }
-//
-//Vector3 reflectionXY(const Vector3 &a) { return (Vector3(-a.x, -a.y, a.z)); }
-//
-//Vector3 reflectionXZ(const Vector3 &a) { return (Vector3(-a.x, a.y, -a.z)); }
-//
-//Vector3 reflectionYZ(const Vector3 &a) { return (Vector3(a.x, -a.y, -a.z)); }
-//
-//Vector3 reflection(const Vector3 &a) { return (Vector3(-a.x, -a.y, -a.z)); }
-
-Vector3 reflection(Vector3 a, Vector3 r);
 #pragma endregion

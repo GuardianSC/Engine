@@ -69,7 +69,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>E:\Programming\AIE Projects\Engine\Engine\Engine\Engine\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Debug;$(SolutionDir)Engine</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(SolutionDir)Debug;$(SolutionDir)Engine</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -134,8 +137,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="renderUtilities.cpp" />
     <ClCompile Include="RigibBody.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -144,12 +151,16 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GCData.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="renderUtilities.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="RigidbodyDynamics.h" />

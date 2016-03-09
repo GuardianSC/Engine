@@ -33,7 +33,7 @@ CollisionData iTest(const ConvexHull &A, const Ray        &b);
 CollisionData iTest(const ConvexHull &A, const Plane      &b);
 CollisionData iTest(const ConvexHull &A, const AABB       &b);
 
-// flip overloads for lhs/rhs
+// Flip overloads for lhs/rhs
 CollisionData iTest(const Circle &b, const AABB   &a) { return iTest(a, b); }
 CollisionData iTest(const Plane  &b, const AABB   &a) { return iTest(a, b); }
 CollisionData iTest(const Ray    &b, const AABB   &a) { return iTest(a, b); }
