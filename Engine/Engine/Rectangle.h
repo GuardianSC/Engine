@@ -43,6 +43,35 @@ public:
 
 	~Rectangle() {}
 
+	Rectangle operator= (const Rectangle r)
+	{
+		Rectangle a;
+
+		a.pos = r.pos;
+
+		a.left = r.left;
+		a.right = r.right;
+		a.top = r.top;
+		a.bottom = r.bottom;
+
+		a.width = r.width;
+		a.height = r.height;
+
+		a.min = r.min;
+		a.max = r.max;
+
+		return a;
+	}
+
+	Rectangle operator== (const Rectangle &r)
+	{
+		return (this->left == r.left && this->right == r.right && this->top == r.top && this->bottom == r.bottom);
+	}
+
+	bool IsEqual(Rectangle& r)
+	{
+		return (this->left == r.left && this->right == r.right && this->top == r.top && this->bottom == r.bottom);
+	}
 	double top;
 	double left;
 	double bottom;
@@ -54,4 +83,6 @@ public:
 	Vector2 pos;
 	Vector2 min;
 	Vector2 max;
+
+	static const Rectangle empty;
 };
