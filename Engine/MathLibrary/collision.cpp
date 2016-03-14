@@ -15,10 +15,10 @@ CollisionData sat_hull(const ConvexHull &A, const ConvexHull &B)
     axes.reserve(A.verts.size() + B.verts.size());
            
     for (int i = 0; i < A.verts.size(); ++i)
-        axes.push_back(Vector2::perp(normal(A.verts[i] - A.verts[(i + 1) % A.verts.size()]), Vector2::magnitude));
+        axes.push_back(Vector2::perp(Vector2::normal(A.verts[i] - A.verts[(i + 1) % A.verts.size()]), Vector2::magnitude));
 
     for (int i = 0; i < B.verts.size(); ++i)
-        axes.push_back(Vector2::perp(normal(B.verts[i] - B.verts[(i + 1) % B.verts.size()], Vector2::magnitude)));
+        axes.push_back(Vector2::perp(Vector2::normal(B.verts[i] - B.verts[(i + 1) % B.verts.size()], Vector2::magnitude)));
 
     for (int j = 0; j < axes.size(); ++j)
     {

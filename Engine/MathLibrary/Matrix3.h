@@ -129,20 +129,13 @@ struct Matrix3
 	// Matrix Matrix multiplication
 	inline Matrix3 operator*(const Matrix3 &b)
 	{
-		{
-			//A can now access rows as vector4
-			Matrix3 r, A = this->transpose();
+		Matrix3 m;
+		m.c[0] = Vector3(m.v[0] * b.v[0] + m.v[3] * b.v[1] + m.v[6] * b.v[2], m.v[1] * b.v[0] + m.v[4] * b.v[1] + m.v[7] * b.v[2], m.v[2] * b.v[0] + m.v[5] * b.v[1] + m.v[8] * b.v[2]);
+		m.c[1] = Vector3(m.v[0] * b.v[3] + m.v[3] * b.v[4] + m.v[6] * b.v[5], m.v[1] * b.v[3] + m.v[4] * b.v[4] + m.v[7] * b.v[5], m.v[2] * b.v[3] + m.v[5] * b.v[4] + m.v[8] * b.v[5]);
+		m.c[2] = Vector3(m.v[0] * b.v[6] + m.v[3] * b.v[7] + m.v[6] * b.v[8], m.v[1] * b.v[6] + m.v[4] * b.v[7] + m.v[7] * b.v[8], m.v[2] * b.v[6] + m.v[5] * b.v[7] + m.v[8] * b.v[8]);
 
-			/*for (size_t i = 0; i < 3; ++i)
-			r.c[i] = Vector4(dot(A.c[0], B.c[i]), dot(A.c[1], B.c[i]), dot(A.c[2], B.c[i]));*/
-			r.c[0] = Vector3(dot(A.c[0], b.c[0]), dot(A.c[1], b.c[0]), dot(A.c[2], b.c[0]));
-			r.c[1] = Vector3(dot(A.c[0], b.c[1]), dot(A.c[1], b.c[1]), dot(A.c[2], b.c[1]));
-			r.c[2] = Vector3(dot(A.c[0], b.c[2]), dot(A.c[1], b.c[2]), dot(A.c[2], b.c[2]));
-
-			return r;
-		}
+		return m;
 	}
-
 
 	//inline Matrix3 operator*=(const Matrix3 &_A, const Matrix3 &b)
 	//{
@@ -161,17 +154,13 @@ struct Matrix3
 	//}
 
 	//Matrix Vector Multiplication
-	inline Vector3 operator*(const Vector3 &b)
-	{
-		Matrix3 A = this->transpose();
-		Vector3 r;
+	//inline Vector3 operator*(const Vector3 &b)
+	//{
+	//	Matrix3 A = this->transpose();
+	//	Vector3 r = (r.x);
 
-		r.x = dot(A.c[0], b);
-		r.y = dot(A.c[1], b);
-		r.z = dot(A.c[2], b);
-
-		return r;
-	}
+	//	return r;
+	//}
 
 #pragma endregion
 };
