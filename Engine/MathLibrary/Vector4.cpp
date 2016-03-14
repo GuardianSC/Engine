@@ -4,33 +4,33 @@
 #include "Vector4.h"
 
 #pragma region "Operators"
-Vector4 operator+(const Vector4  &lhs, const Vector4 &rhs) { return Vector4(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w); }
+Vector4 Vector4::operator+(const Vector4 &rhs) { return Vector4(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w); }
 
-Vector4 operator-(const Vector4  &lhs, const Vector4 &rhs) { return Vector4(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w); }
+Vector4 Vector4::operator-(const Vector4 &rhs) { return Vector4(x - rhs.x, y - rhs.y, z - rhs.z, w - rhs.w); }
 
-Vector4 operator*(const Vector4 &lhs, float rhs) { return Vector4(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs, lhs.w * rhs); }
+Vector4 Vector4::operator*(float rhs) { return Vector4(x * rhs, y * rhs, z * rhs, w * rhs); }
 
-Vector4 operator*(const Vector4 &lhs, Vector4 &rhs) { return Vector4(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w); }
+Vector4 Vector4::operator*(Vector4 &rhs) { return Vector4(x * rhs.x, y * rhs.y, z * rhs.z, w * rhs.w); }
 
-Vector4 operator/(const Vector4 &lhs, float rhs) { return Vector4(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs, lhs.w / rhs); }
+Vector4 Vector4::operator/(float rhs) { return Vector4(x / rhs, y / rhs, z / rhs, w / rhs); }
 
-Vector4& operator+=(const Vector4 &lhs, const Vector4 &rhs) { return Vector4(lhs += rhs); }
+Vector4& Vector4::operator+=(const Vector4 &rhs) { return Vector4(x += rhs.x, y += rhs.y, z += rhs.z, w += rhs.w); }
 
-Vector4& operator-=(const Vector4 &lhs, const Vector4 &rhs) { return Vector4(lhs -= rhs); }
+Vector4& Vector4::operator-=(const Vector4 &rhs) { return Vector4(x -= rhs.x, y -= rhs.y, z -= rhs.z, w -= rhs.w); }
 
-Vector4& operator*=(const Vector4 &lhs, const Vector4 &rhs) { return Vector4(lhs *= rhs); }
+Vector4& Vector4::operator*=(const Vector4 &rhs) { return Vector4(x *= rhs.x, y *= rhs.y, z *= rhs.z, w *= rhs.w); }
 
-Vector4& operator/=(const Vector4 &lhs, const Vector4 &rhs) { return Vector4(lhs /= rhs); }
+Vector4& Vector4::operator/=(const Vector4 &rhs) { return Vector4(x /= rhs.x, y /= rhs.y, z /= rhs.z, w /= rhs.w); }
 
-bool operator <(const Vector4 &lhs, const Vector4 &rhs) { return lhs.x < rhs.x, lhs.y < rhs.y, lhs.z < rhs.z, lhs.w < rhs.w; }
+bool Vector4::operator<(const Vector4 &rhs) { return x < rhs.x, y < rhs.y, z < rhs.z, w < rhs.w; }
 
-bool operator >(const Vector4 &lhs, const Vector4 &rhs) { return lhs.x > rhs.x, lhs.y > rhs.y, lhs.z > rhs.z, lhs.w > rhs.w; }
+bool Vector4::operator>(const Vector4 &rhs) { return x > rhs.x, y > rhs.y, z > rhs.z, w > rhs.w; }
 
-bool operator <=(const Vector4 &lhs, const Vector4 &rhs) { return lhs <= rhs; }
+bool Vector4::operator<=(const Vector4 &rhs) {return (x <= rhs.x, y <= rhs.y, z <= rhs.z, w <= rhs.w); }
 
-bool operator >=(const Vector4 &lhs, const Vector4 &rhs) { return lhs >= rhs; }
+bool Vector4::operator>=(const Vector4 &rhs) { return (x >= rhs.x, y >= rhs.y, z >= rhs.z, w >= rhs.w); }
 
-bool operator--(const Vector4 &a) { return --a; } // unary negation(?)
+bool Vector4::operator-() { return (-x, -y, -z, -w); } // unary negation
 
 												  //#define EPSILON 0.0001f
 												  // return lhs.x == rhs.x && lhs.y == rhs.y;
@@ -39,23 +39,49 @@ inline bool operator==(const Vector4 &lhs, const Vector4 &rhs) { return rhs.x - 
 #pragma endregion
 
 #pragma region "Miscellaneous"
-float dot(const Vector4 &lhs, const Vector4 &rhs) { return (lhs.x * rhs.x) + (lhs.y * rhs.y) + (lhs.z * rhs.z) + (lhs.w * rhs.w); }
+float Vector4::magnitude() const{ return sqrtf(x*x + y*y + z*z + w*w); }
+
+float Vector4::lerp(float alpha, float start, float end) { (1 - alpha)*start + (alpha)*end; }
+
+float Vector4::dot(const Vector4 &rhs) { return (x * rhs.x) + (y * rhs.y) + (z * rhs.z) + (w * rhs.w); }
 
 //assert(magnitude() != 0 && "Divide by Zero");
-Vector4 normal(const Vector4 &a) { return a / a.magnitude(); }
-
-Vector4 scalar(const Vector4 &a, float s) { return Vector4(a.x * s, a.y * s, a.z * s, a.w * s); }
-
-Vector4 direction(Vector4 &a, Vector4 &b) { return normal(a) - normal(b); }
-
-double distance(Vector4 &a, Vector4 &b) { return sqrtf((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z) + (b.w - a.w) * (b.w - a.w)); }
-
-double length(Vector4 &a) { return sqrtf((a.x * a.x) + (a.y * a.y) + (a.z * a.z) + (a.w * a.w)); }
-
-Vector4 reflection(Vector4 a, Vector4 r)
+Vector4 Vector4::normal(float magnitude)
 {
-	r = ((a - r) * normal(a) * (dot(normal(a), a)));
+	Vector4 n;
+	magnitude = (x * x + y * y + z * z);
+	n.x = (x / magnitude);
+	n.y = (y / magnitude);
+	n.z = (z / magnitude);
+	n.w = (w / magnitude);
+	return n;
+}
+
+Vector4 Vector4::scalar(float s) { return Vector4(x * s, y * s, z * s, w * s); }
+
+Vector4 Vector4::direction(Vector4 &b) { return normal(x - b.x, y - b.y, z - b.z, w - b.w); }
+
+double Vector4::distance(Vector4 &b) { return sqrtf((b.x - x) * (b.x - x) + (b.y - y) * (b.y - y) + (b.z - z) * (b.z - z) + (b.w - w) * (b.w - w)); }
+
+double Vector4::length() { return sqrtf((x * x) + (y * y) + (z * z) + (w * w)); }
+
+Vector4 Vector4::reflection(Vector4 &a, Vector4 &b)
+{
+	Vector4 r = ((a - r) * normal(a) * (dot(normal(a), a)));
 	return r;
+}
+
+Vector4 Vector4::min(const Vector4 &a, const Vector4 &b)
+{
+	{ return (a.x < b.x && a.y < b.y && a.z < b.z && a.w < b.w) ? a : b; }
+}
+Vector4 Vector4::max(const Vector4 &a, const Vector4 &b)
+{
+	{ return (a.x < b.x && a.y < b.y && a.z < b.z && a.w < b.w) ? b : a; }
+}
+Vector4 Vector4::clamp(const Vector4 &a, const Vector4 &a_min, const Vector4 &a_max)
+{
+	{ return min(max(a, a_min), a_max); }
 }
 
 #pragma endregion

@@ -10,84 +10,85 @@ struct Vector2
 	Vector2() {}
 	Vector2(float a_x, float a_y) : x(a_x), y(a_y) {}
 
-	float magnitude(const Vector2 &a)  
-	{
-		float m;
-		return sqrtf(a.x * a.x + a.y * a.y); 
-		return m;
-	}
-
-	float lerp(float alpha, float start, float end) { (1 - alpha)*start + (alpha)*end; }
-
-	static Vector2 fromAngle(float a) { return{ cosf(a), sinf(a) }; }
-};
-
 #pragma region "Operators"
-Vector2 operator+(const Vector2  &lhs, const Vector2 &rhs);
+	Vector2 operator+(const Vector2 &rhs);
 
-Vector2 operator-(const Vector2  &lhs, const Vector2 &rhs);
+	Vector2 operator-(const Vector2 &rhs);
 
-Vector2 operator/(const Vector2 &lhs, float rhs);
+	Vector2 operator/(float rhs);
 
-Vector2 operator*(const Vector2 &lhs, float rhs);
+	Vector2 operator*(float rhs);
 
-Vector2 operator*(const Vector2 &lhs, Vector2 &rhs);
+	Vector2 operator*(Vector2 &rhs);
 
-Vector2& operator+=(const Vector2 &lhs, const Vector2 &rhs);
+	Vector2& operator+=(const Vector2 &rhs);
 
-Vector2& operator-=(const Vector2 &lhs, const Vector2 &rhs);
+	Vector2& operator-=(const Vector2 &rhs);
 
-Vector2& operator*=(const Vector2 &lhs, const Vector2 &rhs);
+	Vector2& operator*=(const Vector2 &rhs);
 
-Vector2& operator/=(const Vector2 &lhs, const Vector2 &rhs);
+	Vector2& operator/=(const Vector2 &rhs);
 
-bool operator <(const Vector2 &lhs, const Vector2 &rhs);
+	bool operator<(const Vector2 &rhs);
 
-bool operator >(const Vector2 &lhs, const Vector2 &rhs);
+	bool operator>(const Vector2 &rhs);
 
-bool operator <=(const Vector2 &lhs, const Vector2 &rhs);
+	bool operator<=(const Vector2 &rhs);
 
-bool operator >=(const Vector2 &lhs, const Vector2 &rhs);
+	bool operator>=(const Vector2 &rhs);
 
-bool operator-(const Vector2 &a); // unary negation(?)
+	bool operator-(); // unary negation
 
 
 //#define EPSILON 0.0001f
 //return fabsf(rhs.x - lhs.x) < FLT_EPSILON && fabsf(rhs.y - lhs.y) < FLT_EPSILON;
 // return lhs.x == rhs.x && lhs.y == rhs.y;
 
-bool operator==(const Vector2 &lhs, const Vector2 &rhs);
+	bool operator==(const Vector2 &rhs);
 
-bool operator!=(const Vector2 &lhs, const Vector2 &rhs);
+	bool operator!=(const Vector2 &rhs);
 #pragma endregion
 
 #pragma region "Miscellaneous"
-// Dot production tells us how much one vector extends in the direction of another vector
-float dot(const Vector2 &lhs, const Vector2 &rhs);
+	// Dot production tells us how much one vector extends in the direction of another vector
 
-//assert(magnitude() != 0 && "Divide by Zero");
-Vector2 normal(Vector2 &a);
+	float magnitude();
 
-//Vector2 perpX(const Vector2 &a);
+	float lerp(float alpha, float start, float end);
 
-//Vector2 perpY(const Vector2 &a);
+	static Vector2 fromAngle(float a);
 
-Vector2 scalar(const Vector2 &a, float s);
+	float dot(const Vector2 &lhs, const Vector2 &rhs);
 
-Vector2 direction(Vector2 &a, Vector2 &b);
+	//assert(magnitude() != 0 && "Divide by Zero");
+	Vector2 normal(Vector2 &a);
 
-double distance(Vector2 &a, Vector2 &b);
+	//Vector2 perpX(const Vector2 &a);
 
-double length(Vector2 &a);
+	//Vector2 perpY(const Vector2 &a);
 
-float angle();
+	Vector2 scalar(const Vector2 &a, float s);
 
-Vector2 perp(const Vector2 &a);
+	Vector2 direction(Vector2 &a, Vector2 &b);
 
-float dot(const Vector2 &a, const Vector2 &b);
+	double distance(Vector2 &a, Vector2 &b);
 
-Vector2 project(const Vector2 &a, const Vector2 &b, float magnitude);
+	double length(Vector2 &a);
 
-Vector2 reflection(Vector2 a, Vector2 r);
+	float angle();
+
+	Vector2 perp(const Vector2 &a);
+
+	Vector2 project(const Vector2 &a, const Vector2 &b, float magnitude);
+
+	Vector2 reflection(Vector2 &a, Vector2 &b);
+
+	Vector2 min(const Vector2 &a, const Vector2 &b);
+
+	Vector2 max(const Vector2 &a, const Vector2 &b);
+
+	Vector2 clamp(const Vector2 &a, const Vector2 &a_min, const Vector2 &a_max);
 
 #pragma endregion
+};
+

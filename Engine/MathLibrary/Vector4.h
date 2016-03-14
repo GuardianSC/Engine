@@ -10,63 +10,72 @@ struct Vector4
 	Vector4() {}
 	Vector4(float a_x, float a_y, float a_z, float a_w) : x(a_x), y(a_y), z(a_z), w(a_w) {}
 
-	float magnitude() const { return sqrtf(x*x + y*y + z*z + w*w); }
 
-	float lerp(float alpha, float start, float end) { (1 - alpha)*start + (alpha)*end; }
-
-};
 
 #pragma region "Operators"
-Vector4 operator+(const Vector4  &lhs, const Vector4 &rhs);
+	Vector4 operator+(const Vector4 &rhs);
 
-Vector4 operator-(const Vector4  &lhs, const Vector4 &rhs);
+	Vector4 operator-(const Vector4 &rhs);
 
-Vector4 operator*(const Vector4 &lhs, float rhs);
+	Vector4 operator*(float rhs);
 
-Vector4 operator*(const Vector4 &lhs, Vector4 &rhs);
+	Vector4 operator*(Vector4 &rhs);
 
-Vector4 operator/(const Vector4 &lhs, float rhs);
+	Vector4 operator/(float rhs);
 
-Vector4& operator+=(const Vector4 &lhs, const Vector4 &rhs);
+	Vector4& operator+=(const Vector4 &rhs);
 
-Vector4& operator-=(const Vector4 &lhs, const Vector4 &rhs);
+	Vector4& operator-=(const Vector4 &rhs);
 
-Vector4& operator*=(const Vector4 &lhs, const Vector4 &rhs);
+	Vector4& operator*=(const Vector4 &rhs);
 
-Vector4& operator/=(const Vector4 &lhs, const Vector4 &rhs);
+	Vector4& operator/=(const Vector4 &rhs);
 
-bool operator <(const Vector4 &lhs, const Vector4 &rhs);
+	bool operator<(const Vector4 &rhs);
 
-bool operator >(const Vector4 &lhs, const Vector4 &rhs);
+	bool operator>(const Vector4 &rhs);
 
-bool operator <=(const Vector4 &lhs, const Vector4 &rhs);
+	bool operator<=(const Vector4 &rhs);
 
-bool operator >=(const Vector4 &lhs, const Vector4 &rhs);
+	bool operator>=(const Vector4 &rhs);
 
-bool operator--(const Vector4 &a); // unary negation(?)
+	bool operator-(); // unary negation
 
 //#define EPSILON 0.0001f
 // return lhs.x == rhs.x && lhs.y == rhs.y;
 //return fabsf(rhs.x - lhs.x) < FLT_EPSILON && fabsf(rhs.y - lhs.y) < FLT_EPSILON;
-inline bool operator==(const Vector4 &lhs, const Vector4 &rhs);
+	inline bool operator==(const Vector4 &rhs);
 #pragma endregion
 
 #pragma region "Miscellaneous"
-float dot(const Vector4 &lhs, const Vector4 &rhs);
+	float magnitude() const;
 
-//assert(magnitude() != 0 && "Divide by Zero");
-Vector4 normal(const Vector4 &a);
+	float lerp(float alpha, float start, float end);
 
-Vector4 scalar(const Vector4 &a, float s);
+	float dot(const Vector4 &rhs);
 
-Vector4 direction(Vector4 &a, Vector4 &b);
+	//assert(magnitude() != 0 && "Divide by Zero");
+	Vector4 normal(float magnitude);
 
-double distance(Vector4 &a, Vector4 &b);
+	Vector4 scalar(float s);
 
-double length(Vector4 &a);
+	Vector4 direction(Vector4 &b);
 
-Vector4 reflection(Vector4 a, Vector4 r);
+	double distance(Vector4 &b);
+
+	double length();
+
+	Vector4 reflection(Vector4 &a, Vector4 &b);
+		
+	Vector4 min(const Vector4 &a, const Vector4 &b);
+
+	Vector4 max(const Vector4 &a, const Vector4 &b);
+
+	Vector4 clamp(const Vector4 &a, const Vector4 &a_min, const Vector4 &a_max););
 
 #pragma endregion
 
+
+
+};
 
