@@ -7,7 +7,6 @@
 
 // Shapes!
 
-
 struct Collider : GCData<Collider>
 {
 	enum SHAPE { e_CIRCLE = 1, e_AABB = 2, e_RAY = 4, e_PLANE = 8 } shape;
@@ -25,5 +24,4 @@ struct Collider : GCData<Collider>
 	ConvexHull chull;
 };
 
-CollisionData EvaluateCollision(const Transform &at, const Collider &ac,
-	const Transform &bt, const Collider &bc);
+CollisionData EvaluateCollision(const Transform &at, const Collider &ac, const Transform &bt, const Collider &bc);

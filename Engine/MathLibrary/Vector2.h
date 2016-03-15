@@ -17,7 +17,7 @@ struct Vector2
 
 	Vector2 operator/(float rhs) const;
 
-	Vector2 operator*(float rhs) const;
+	Vector2 operator*(float f) const;
 
 	Vector2 operator*(Vector2 &rhs) const;
 
@@ -54,7 +54,7 @@ struct Vector2
 
 	float magnitude();
 
-	float lerp(float alpha, float start, float end);
+	static float lerp(float alpha, float start, float end);
 
 	static Vector2 fromAngle(float a);
 
@@ -84,5 +84,6 @@ struct Vector2
 	Vector2 clamp(const Vector2 &a, const Vector2 &a_min, const Vector2 &a_max);
 
 #pragma endregion
+
 };
 

@@ -140,6 +140,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LifetimeSystem.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -151,6 +152,10 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="DynamicResolution.h" />
+    <ClInclude Include="Life.h" />
+    <ClInclude Include="LifeSystem.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Circle.h" />

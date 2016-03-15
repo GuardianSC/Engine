@@ -13,11 +13,11 @@ CollisionData sat_hull(const ConvexHull &A, const ConvexHull &B)
     std::vector<Vector2> axes;
     axes.reserve(A.verts.size() + B.verts.size());
 
-    for (int i = 0; i < A.verts.size(); ++i)
+    /*for (int i = 0; i < A.verts.size(); ++i)
         axes.push_back(Vector2::perp(Vector2::normal(A.verts[i] - A.verts[(i + 1) % A.verts.size()]), Vector2::magnitude));
 
     for (int i = 0; i < B.verts.size(); ++i)
-        axes.push_back(Vector2::perp(Vector2::normal(B.verts[i] - B.verts[(i + 1) % B.verts.size()]), Vector2::magnitude));
+        axes.push_back(Vector2::perp(Vector2::normal(B.verts[i] - B.verts[(i + 1) % B.verts.size()]), Vector2::magnitude));*/
 
     for (int j = 0; j < axes.size(); ++j)
     {
@@ -49,7 +49,6 @@ CollisionData sat_hull(const ConvexHull &A, const ConvexHull &B)
     return cd;
 }
 
-// untested - algorithm sound but could be typos
 CollisionData sat_hull_ray(const ConvexHull &A, const Ray &r)
 {
     CollisionData cd = { false, INFINITY }; // setup return value
@@ -57,8 +56,8 @@ CollisionData sat_hull_ray(const ConvexHull &A, const Ray &r)
     std::vector<Vector2> axes;
     
     axes.reserve(A.verts.size());
-    for (int i = 0; i < A.verts.size(); ++i)
-        axes.push_back(Vector2::perp(Vector2::normal(A.verts[i] - A.verts[(i + 1) % A.verts.size()]), Vector2::magnitude));
+   /* for (int i = 0; i < A.verts.size(); ++i)
+        axes.push_back(Vector2::perp(Vector2::normal(A.verts[i] - A.verts[(i + 1) % A.verts.size()]), Vector2::magnitude));*/
 
     float tmin = 0,  //"Entering" scalar for the ray
           tmax = 1;  //"Leaving"  scalar for the ray            
@@ -77,7 +76,7 @@ CollisionData sat_hull_ray(const ConvexHull &A, const Ray &r)
         {
                 tmin = fmaxf(tmin, t);
                 cnormal = axes[i];
-                cd = { tmin < tmax, (tmax-tmin) * r.length, axes[i], r.position +		 r.direction * r.length *tmin };
+                cd = { tmin < tmax, (tmax-tmin) * r.length, axes[i], r.position + r.direction * r.length *tmin };
         }
         else    tmax = fminf(tmax, t);
 
