@@ -57,7 +57,7 @@ Vector2 Vector2::fromAngle(float a) { return{ cosf(a), sinf(a) }; }
 float Vector2::dot(const Vector2 &lhs, const Vector2 &rhs) { return (lhs.x * rhs.x) + (rhs.y * lhs.y); }
 
 //assert(magnitude() != 0 && "Divide by Zero");
-Vector2 Vector2::normal(Vector2 &b)
+ Vector2 Vector2::normal(Vector2 &b) 
 { 
 	float m = (b.x * b.x + b.y * b.y);
 	return b / m; 

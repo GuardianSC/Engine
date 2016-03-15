@@ -8,7 +8,7 @@ struct Vector2
 	float x, y;
 
 	Vector2() {}
-	Vector2(float a_x, float a_y) : x(a_x), y(a_y) {}
+	Vector2(double a_x, double a_y) : x(a_x), y(a_y) {}
 
 #pragma region "Operators"
 	Vector2 operator+(const Vector2 &rhs) const;
@@ -58,10 +58,10 @@ struct Vector2
 
 	static Vector2 fromAngle(float a);
 
-	float dot(const Vector2 &lhs, const Vector2 &rhs);
+	static float dot(const Vector2 &lhs, const Vector2 &rhs);
 
 	//assert(magnitude() != 0 && "Divide by Zero");
-	Vector2 normal(Vector2 &b);
+	static Vector2 normal(Vector2 &b);
 
 	Vector2 scalar(const Vector2 &a, float s);
 
@@ -71,7 +71,7 @@ struct Vector2
 
 	float angle();
 
-	Vector2 perp(const Vector2 &a);
+	static Vector2 perp(const Vector2 &a);
 
 	Vector2 project(const Vector2 &a, const Vector2 &b, float magnitude);
 

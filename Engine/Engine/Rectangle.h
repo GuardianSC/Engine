@@ -4,13 +4,26 @@
 struct Rectangle
 {
 public:
+	double top;
+	double left;
+	double bottom;
+	double right;
+
+	double width;
+	double height;
+
+	Vector2 pos;
+	Vector2 min;
+	Vector2 max;
+
+	static const Rectangle empty;
 
 	Rectangle() : left(0), top(0), right(0), bottom(0) 
 	{
 		width = right - left;
 		height = bottom - top;
-		//min = { top, left };
-		//max = { bottom, right };
+		min = { top, left };
+		max = { bottom, right };
 	}
 
 	Rectangle(const Rectangle &r) : left(r.left), top(r.top), right(r.right), bottom(r.bottom)
@@ -18,8 +31,8 @@ public:
 		width = r.width;
 		height = r.height;
 		pos = { top + (width / 2), right + (height / 2) };
-		//min = { top, left };
-		//max = { bottom, right };
+		min = { top, left };
+		max = { bottom, right };
 	}
 
 
@@ -62,27 +75,13 @@ public:
 
 		return a;
 	}
-
-	Rectangle operator== (const Rectangle &r)
-	{
-		return (this->left == r.left && this->right == r.right && this->top == r.top && this->bottom == r.bottom);
-	}
-
-	bool IsEqual(Rectangle& r)
-	{
-		return (this->left == r.left && this->right == r.right && this->top == r.top && this->bottom == r.bottom);
-	}
-	double top;
-	double left;
-	double bottom;
-	double right;
-
-	double width;
-	double height;
-
-	Vector2 pos;
-	Vector2 min;
-	Vector2 max;
-
-	static const Rectangle empty;
 };
+
+inline bool operator== (const Rectangle r1, const Rectangle& r2)
+{
+	return (r1.left == r2.left && r1.right == r2.right && r1.top == r2.top && r1.bottom == r2.bottom);
+}
+inline bool operator!= (const Rectangle r1, const Rectangle& r2)
+{
+	return !(r1 == r2);
+}
