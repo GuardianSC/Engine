@@ -156,6 +156,8 @@
     <ClInclude Include="DynamicResolution.h" />
     <ClInclude Include="Life.h" />
     <ClInclude Include="LifeSystem.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerSystem.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Circle.h" />

@@ -17,13 +17,13 @@ struct Collision
 class CollisionSystem
 {
 	virtual bool condition(Collision a) = 0;
-	virtual bool update(Collision a) = 0;
+	virtual void update(Collision a) = 0;
 	virtual void onStep() {}
 public:
 	void step()
 	{
 		onStep();
-		for each (Collision c in Collision::getData())
+		for each(Collision c in Collision::getData())
 			update(c);
 	}
 };

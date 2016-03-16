@@ -7,14 +7,13 @@ class LifeSystem : public System
 {
 	bool condition(Handle<Entity> i)
 	{
-		return i->lifetime > -1;
+		return i->lifecycle > -1;
 	}
-
 	void update(Handle<Entity> i)
 	{
-		if (i->lifespan->lifetime > i->lifespan->lifespan)
+		if (i->lifecycle->lifetime > i->lifecycle->lifespan)
 			Entity::free(i);
 		else
-		i->lifespan->lifetime += Time::instance().getDeltaTime();
+			i->lifecycle->lifetime += Time::instance().getDeltaTime();
 	}
 };

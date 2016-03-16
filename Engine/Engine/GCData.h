@@ -2,9 +2,6 @@
 #include <vector>
 #include <queue>
 
-/*
-
-*/
 template<typename T>
 struct Handle
 {

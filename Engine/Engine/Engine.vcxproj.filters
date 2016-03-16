@@ -131,6 +131,12 @@
     <ClInclude Include="DynamicResolution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="sfw.lib">

@@ -7,7 +7,7 @@
 struct CollisionData // Wrapper for Minimum Translation Vector
 {
 	bool     result;         // Did we collide?
-	float    depth;
+	float    depth;			 // A.K.A. penetration depth
 	Vector2  normal;   // CollisionNormal * PenetrationDepth = Minimum Translation Vector, also called the impulse vector, very important! 
 };
 

@@ -66,6 +66,11 @@
 #include <iostream>
 #include "Factory.h"
 #include "DebugDraw.h"
+#include "RigidbodyDynamics.h"
+#include "LifeSystem.h"
+#include "CollisionDetection.h"
+#include "DynamicResolution.h"
+#include "PlayerSystem.h"
 
 void main()
 {
@@ -77,11 +82,19 @@ void main()
 	input.init();
 	time.init();
 
-	Factory::makeBall({ 40,  40 }, { 10,10 }, 400, 40);
-	Factory::makeBall({ 70,  70 }, { 40,40 }, 120, 12);
-	Factory::makeBall({ 80, 200 }, { 0,100 }, 280, 200);
+	//Factory::makeBall({ 40,  40 },  {10,10},  400,  40)->rigidbody->addTorque(1000);
+	//        Factory::makeBall({ 80,  200 },  { 100,0}, 120, 120);
+	auto e = Factory::makeBall({ 720, 200 }, {}, 60, 1);
+
+
+	e->controller = PlayerController::make();
 
 	DebugDraw debugDraw;
+	RigidbodyDynamics rigidbodies;
+	LifeSystem lifetimes;
+	CollisionDetection collisioner;
+	DynamicResolution dynamic;
+	PlayerSystem flightsystem;
 
 	while (window.step())
 	{
@@ -89,6 +102,17 @@ void main()
 		time.step();
 
 		debugDraw.step();
+		std::cout << e->rigidbody->force << std::endl;
+		flightsystem.step();
+
+
+		rigidbodies.step();
+		lifetimes.step();
+
+		collisioner.step();
+		dynamic.step();
+
+
 	}
 
 	time.term();
