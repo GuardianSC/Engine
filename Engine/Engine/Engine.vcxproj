@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assets.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="DynamicResolution.h" />
     <ClInclude Include="Life.h" />
@@ -168,14 +170,15 @@
     <ClInclude Include="GCData.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="renderUtilities.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="RigidbodyDynamics.h" />
     <ClInclude Include="sfwdraw.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="VMath.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

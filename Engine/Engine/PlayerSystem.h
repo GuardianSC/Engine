@@ -13,22 +13,18 @@ class PlayerSystem : public System
 
 	void update(Handle<Entity> i)
 	{
-		auto &i = Input::instance();
+		auto &input = Input::instance();
 		auto &c = *i->controller;
 		auto &r = *i->rigidbody;
 		float dt = Time::instance().getDeltaTime();
 
 		if (input.getKey(c.LEFT))
-		{
-			r.addForce(-c.turnSpeed);
-		}
+			i->rigidbody->addTorque(c.turnSpeed);
+
 		if (input.getKey(c.RIGHT))
-		{
-			r.addForce(c.turnSpeed);
-		}
+			r.addTorque(-c.turnSpeed);
+
 		if (input.getKey(c.UP))
-		{
-			r.addForce(i->transform->getUp() * c.speed * dt);
-		}
+			r.addForce(i->transform->getUp() * c.speed);
 	}
 };

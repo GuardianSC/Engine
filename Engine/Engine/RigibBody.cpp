@@ -1,9 +1,11 @@
 #include "Rigidbody.h"
 #include "Transform.h"
 
-Rigidbody::Rigidbody() : acceleration({ 0,0 }), velocity({ 0,0 }), mass(1), force({ 0,0 }), drag(0) {}
+Rigidbody::Rigidbody() : acceleration({ 0,0 }), velocity({ 0,0 }), mass(1), force({ 0,0 }), drag(0), torque(0), av(0), ac(0) {}
 
 void Rigidbody::addForce(const Vector2 &a) { force = force + a; }
+
+void Rigidbody::addTorque(float a) { torque += a; }
 
 void Rigidbody::integrate(Transform *t, float dt)
 {

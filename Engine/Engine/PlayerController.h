@@ -6,8 +6,7 @@ class PlayerController : public GCData<PlayerController>
 public:
 	char LEFT, RIGHT, UP;
 
-	float speed;
-	float turnSpeed;
+	float speed, turnSpeed, terminalVelocity, terminalAngleVelocity;
 
 	PlayerController() : LEFT ('A'), RIGHT('D'), UP('W'), speed(300), turnSpeed(300) {}
 };

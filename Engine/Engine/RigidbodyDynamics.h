@@ -11,9 +11,5 @@ class RigidbodyDynamics : public System
 		return i->transform > -1 && i->rigidbody > -1;
 	}
 
-	void update(Handle<Entity> i)
-	{
-		i->rigidbody->integrate(&i->transform,
-			Time::instance().getDeltaTime());
-	}
+	void update(Handle<Entity> i) { i->rigidbody->integrate(&i->transform, Time::instance().getDeltaTime()); }
 };

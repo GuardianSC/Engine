@@ -6,6 +6,7 @@
 #include "Transform.h"
 #include "Life.h"
 #include "PlayerController.h"
+#include "Sprite.h"
 
 struct Entity : GCData<Entity>
 {
@@ -19,6 +20,7 @@ struct Entity : GCData<Entity>
 	Handle<Collider > collider;
 	Handle<Life> life;
 	Handle<PlayerController> controller;
+	Handle<Sprite> sprite;
 
 	void onFree()
 	{
@@ -27,6 +29,7 @@ struct Entity : GCData<Entity>
 		Collider::free(collider.index);
 		Life::free(life.index);
 		PlayerController::free(controller.index);
+		Sprite::free(sprite.index);
 	}
 };
 

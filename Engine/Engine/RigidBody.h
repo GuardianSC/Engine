@@ -8,10 +8,10 @@ public:
 	float mass;
 
 	Vector2 velocity, acceleration, force, jerk;
-	float drag;
+	float drag, av, ac, torque;;
 
 	Rigidbody();
 	void addForce(const Vector2 &);
-
+	void Rigidbody::addTorque(float a);
 	void integrate(class Transform *, float dt);
 };
