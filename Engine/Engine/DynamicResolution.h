@@ -11,7 +11,7 @@ class DynamicResolution : public CollisionSystem
 
     void update(Collision c)
     {
-        Vector2 MTV = c.collisionData.normal * c.collisionData.depth;
+        Vector2 MTV = c.collision.normal * c.collision.depth;
 
         Vector2 p1 = c.first ->transform->getPosition() - MTV/2;
         Vector2 p2 = c.second->transform->getPosition() + MTV/2;

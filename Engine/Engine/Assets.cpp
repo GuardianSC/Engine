@@ -15,7 +15,7 @@ Matrix4 matrix3to4(const float *m, float Z)
 
 void Assets::loadTexture(const std::string &name, const char *path)
 {
-	assert(Window::instance().isInitialized & "Window is not initialized!");
+	assert(Window::instance().isInitialized() && "Window is not initialized!");
 
 	Texture temp;
 	temp.handle = sfw::loadTextureMap(path);

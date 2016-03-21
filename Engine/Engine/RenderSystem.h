@@ -2,9 +2,8 @@
 #include "System.h"
 #include "Assets.h"
 
-class RenderSystem : System
+class RenderSystem : public System
 {
-
 	bool condition(Handle<Entity> i)
 	{
 		return i->sprite > -1 && i->transform > -1;

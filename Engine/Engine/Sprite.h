@@ -12,5 +12,5 @@ public:
 
 	std::string assetName;
 
-	Sprite() : position({}), dimension({1,1}), angle(0), assetName("") {} // ({}) = ({0,0})
+	Sprite() : offset({}), dimension({1,1}), angle(0), assetName("") {} // ({}) = ({0,0})
 };
