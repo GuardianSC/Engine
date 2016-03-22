@@ -51,7 +51,20 @@ CollisionData iTest(Circle &a, const AABB &b)
 
 CollisionData iTest(const AABB &a, const Ray &b)
 {
+	// Separating AABB sides into planes
+	Vector2 aabbP1 = (a.min(), a.halfextents); // Down
+	Vector2 aabbP2 = (a.max(), a.halfextents); // Up
+	Vector2 aabbP1 = (a.min(), a.halfextents); // Left
+	Vector2 aabbP2 = (a.max(), a.halfextents); // Right
 
+	// finding each plane's distance to ray
+	//d1 = ;
+}
+
+CollisionData iTest(const AABB  &a, const Plane  &b)
+{
+	CollisionData cd = b.normal * (a.position - b.position) <= ;
+	return cd;
 }
 
 CollisionData iTest(const Circle &a, const Circle &b)
