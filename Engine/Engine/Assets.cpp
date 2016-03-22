@@ -25,7 +25,7 @@ void Assets::loadTexture(const std::string &name, const char *path)
 	textures[name] = temp;
 }
 
-void Assets::drawTexture(const std::string &name, const Matrix3 &m = Matrix3::identity())
+void Assets::drawTexture(const std::string &name, const Matrix3 &m/* = Matrix3::identity()*/)
 {
 	sfw::drawTextureMatrix(getTexture(name).handle, 0, WHITE, m.v);
 }

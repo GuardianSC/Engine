@@ -39,7 +39,7 @@ class CollisionDetection: public BinarySystem
 		auto cd = EvaluateCollision(*i->transform, *i->collider, *j->transform, *j->collider);
 		if (cd.result)
 		{
-			Collision::getData().push_back(CollisionDetection{ i,j, cd });
+			Collision::getData().push_back(Collision{ i,j, cd });
 		}
 	}
 };

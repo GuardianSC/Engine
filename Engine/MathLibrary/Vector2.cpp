@@ -98,4 +98,9 @@ Vector2 Vector2::clamp(const Vector2 &a, const Vector2 &a_min, const Vector2 &a_
 	{ return min(max(a, a_min), a_max); }
 }
 
+Vector2 Vector2::snap(const Vector2 &val, const Vector2 &lower, const Vector2 &upper)
+{
+	return{ val.x - lower.x < upper.x - val.x ? lower.x : upper.x, val.y - lower.y < upper.y - val.y ? lower.y : upper.y };
+}
+
 #pragma endregion

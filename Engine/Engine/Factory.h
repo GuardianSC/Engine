@@ -5,7 +5,6 @@
 
 struct Factory
 {
-
     static Handle<Entity> makeBall(Vector2 pos, Vector2 vel, float radius, float mass)
     {
         auto e = Entity::make();
@@ -13,7 +12,7 @@ struct Factory
         e->rigidbody = Rigidbody::make();
         e->transform = Transform::make();
 
-        e->collider->circle.r = radius;
+        e->collider->circle.radius = radius;
         e->collider->shape = Collider::e_CIRCLE;
         e->rigidbody->mass = mass;
         e->rigidbody->velocity = vel;

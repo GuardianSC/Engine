@@ -83,6 +83,8 @@ struct Vector2
 
 	Vector2 clamp(const Vector2 &a, const Vector2 &a_min, const Vector2 &a_max);
 
+	static Vector2 snap(const Vector2 &val, const Vector2 &lower, const Vector2 &upper);
+
 #pragma endregion
 
 };

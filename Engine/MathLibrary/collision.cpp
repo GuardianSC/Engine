@@ -5,82 +5,63 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
+#include "Shapes.h"
 
-CollisionData sat_hull(const ConvexHull &A, const ConvexHull &B)
+// DSAT calculates the Separating Axis Theorem in 1-D
+	// We can calculate the results along the x and y axis separately,
+	// and just pick the shortest one
+CollisionData DSAT(float amin, float amax, float bmin, float bmax, Vector2 axis)
 {
-    CollisionData cd = { false, INFINITY }; // setup return value
+	float pDr = amax - bmin;
+	float pDl = bmax - amin;
 
-    std::vector<Vector2> axes;
-    axes.reserve(A.verts.size() + B.verts.size());
+	float pD = std::fminf(pDr, pDl);
 
-    /*for (int i = 0; i < A.verts.size(); ++i)
-        axes.push_back(Vector2::perp(Vector2::normal(A.verts[i] - A.verts[(i + 1) % A.verts.size()]), Vector2::magnitude));
+	float H = std::copysignf(1, pDr - pDl);
 
-    for (int i = 0; i < B.verts.size(); ++i)
-        axes.push_back(Vector2::perp(Vector2::normal(B.verts[i] - B.verts[(i + 1) % B.verts.size()]), Vector2::magnitude));*/
 
-    for (int j = 0; j < axes.size(); ++j)
-    {
-        float amin = INFINITY, amax = -INFINITY;
-        float bmin = INFINITY, bmax = -INFINITY;
-
-        for (int i = 0; i < A.verts.size(); ++i)
-        {
-            float pp = Vector2::dot(axes[j],A.verts[i]);
-            amin = fminf(pp, amin);
-            amax = fminf(pp, amax);
-        }
-
-        for (int i = 0; i < B.verts.size(); ++i)
-        {
-            float pp = Vector2::dot(axes[j], B.verts[i]);
-            amin = fminf(pp, amin);
-            amax = fminf(pp, amax);
-        }
-
-        float pdepth = fminf(amax - bmin, bmax - amin);
-
-        if (pdepth < cd.depth)
-        {
-            cd = { pdepth < 0, pdepth, axes[j] };
-            if (pdepth < 0) return cd;
-        }  
-    }
-    return cd;
+	return{ pD > 0, pD, axis*H };
 }
 
-CollisionData sat_hull_ray(const ConvexHull &A, const Ray &r)
+CollisionData iTest(const AABB &a, const AABB &b)
 {
-    CollisionData cd = { false, INFINITY }; // setup return value
+	auto cdx = DSAT(a.min().x, a.max().x, b.min().x, b.max().x, { 1, 0 });
+	auto cdy = DSAT(a.min().y, a.max().y, b.min().y, b.max().y, { 0, 1 });
 
-    std::vector<Vector2> axes;
-    
-    axes.reserve(A.verts.size());
-   /* for (int i = 0; i < A.verts.size(); ++i)
-        axes.push_back(Vector2::perp(Vector2::normal(A.verts[i] - A.verts[(i + 1) % A.verts.size()]), Vector2::magnitude));*/
+	return cdx.depth < cdy.depth ? cdx : cdy;
+}
 
-    float tmin = 0,  //"Entering" scalar for the ray
-          tmax = 1;  //"Leaving"  scalar for the ray            
+CollisionData iTest(Circle &a, const AABB &b)
+{
+	// Snap is just a clamp that includes interior spaces
+	// We can create a circle to represent the clamping point
+	// and just use the circle vs circle test.
+	Circle cp = { Vector2::snap(a.position, b.min(), b.max()), 0 };
 
-    Vector2 cnormal;
-    float tpmin;
+	// If the circle's position was inside of the AABB
+	// And we use the clamp, our normal will get messed up.
+	// To fix that, we need to know whether we clamped from outside
+	// or snapped from inside. If so, we need to swap the operands.
+	if (b.min() < a.position && a.position < b.max())
+		std::swap(a, cp);
 
-    for (int i = 0; i < axes.size(); ++i)
-    {    
-        float N = Vector2::dot(axes[i], r.position - A.verts[i]);
-        float D = -Vector2::dot(axes[i], r.direction);
+	// circle circle test
+	return iTest(a, cp);
+}
 
-        float t = N / D;
+CollisionData iTest(const AABB &a, const Ray &b)
+{
 
-        if (D < 0 && t > tmin)
-        {
-                tmin = fmaxf(tmin, t);
-                cnormal = axes[i];
-                cd = { tmin < tmax, (tmax-tmin) * r.length, axes[i], r.position + r.direction * r.length *tmin };
-        }
-        else    tmax = fminf(tmax, t);
+}
 
-        if (tmin > tmax) return cd;
-    }
-    return cd;
+CollisionData iTest(const Circle &a, const Circle &b)
+{
+	CollisionData cd;
+	auto diff = b.position - a.position;
+
+	cd.normal = Vector2::normal(diff);
+	cd.depth = (b.radius + a.radius) - diff.magnitude();
+	cd.result = cd.depth > 0;
+
+	return cd;
 }

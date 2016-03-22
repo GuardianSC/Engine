@@ -16,7 +16,7 @@ public:
 
 	Texture getTexture(const std::string &name);
 
-	void drawTexture(const std::string &name, const Matrix3 &m = Matrix3::identity());
+	void drawTexture(const std::string &name, const Matrix3 &m /*= Matrix3::identity()*/);
 
 	static Assets &instance() { static Assets i; return i; }
 };

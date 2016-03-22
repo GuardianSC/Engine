@@ -156,6 +156,7 @@
     <ClInclude Include="Assets.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="DynamicResolution.h" />
+    <ClInclude Include="HealthSystem.h" />
     <ClInclude Include="Life.h" />
     <ClInclude Include="LifeSystem.h" />
     <ClInclude Include="PlayerController.h" />
