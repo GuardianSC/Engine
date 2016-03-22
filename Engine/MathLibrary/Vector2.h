@@ -15,11 +15,11 @@ struct Vector2
 
 	Vector2 operator-(const Vector2 &rhs) const;
 
-	Vector2 operator/(float rhs) const;
-
 	Vector2 operator*(float f) const;
 
-	Vector2 operator*(Vector2 &rhs) const;
+	Vector2 operator*(const Vector2 &rhs) const;
+
+	Vector2 operator/(float rhs) const;
 
 	Vector2& operator+=(const Vector2 &rhs);
 

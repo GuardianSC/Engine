@@ -19,43 +19,42 @@ CollisionData DSAT(float amin, float amax, float bmin, float bmax, Vector2 axis)
 
 	float H = std::copysignf(1, pDr - pDl);
 
-
 	return{ pD > 0, pD, axis*H };
 }
 
 CollisionData iTest(const AABB &a, const AABB &b)
 {
-	auto cdx = DSAT(a.min().x, a.max().x, b.min().x, b.max().x, { 1, 0 });
-	auto cdy = DSAT(a.min().y, a.max().y, b.min().y, b.max().y, { 0, 1 });
+	auto cdX = DSAT(a.min().x, a.max().x, b.min().x, b.max().x, { 1, 0 });
+	auto cdY = DSAT(a.min().y, a.max().y, b.min().y, b.max().y, { 0, 1 });
 
-	return cdx.depth < cdy.depth ? cdx : cdy;
+	return cdX.depth < cdY.depth ? cdX : cdY;
 }
 
-CollisionData iTest(Circle &a, const AABB &b)
+CollisionData iTest(const AABB &a, Circle &b)
 {
 	// Snap is just a clamp that includes interior spaces
 	// We can create a circle to represent the clamping point
 	// and just use the circle vs circle test.
-	Circle cp = { Vector2::snap(a.position, b.min(), b.max()), 0 };
+	Circle cp = { Vector2::snap(b.position, a.min(), a.max()), 0 };
 
 	// If the circle's position was inside of the AABB
 	// And we use the clamp, our normal will get messed up.
 	// To fix that, we need to know whether we clamped from outside
 	// or snapped from inside. If so, we need to swap the operands.
-	if (b.min() < a.position && a.position < b.max())
-		std::swap(a, cp);
+	if (a.min() < a.position && a.position < a.max())
+		std::swap(b, cp);
 
 	// circle circle test
-	return iTest(a, cp);
+	return iTest(b, cp);
 }
 
 CollisionData iTest(const AABB &a, const Ray &b)
 {
 	// Separating AABB sides into planes
-	Vector2 aabbP1 = (a.min(), a.halfextents); // Down
-	Vector2 aabbP2 = (a.max(), a.halfextents); // Up
-	Vector2 aabbP1 = (a.min(), a.halfextents); // Left
-	Vector2 aabbP2 = (a.max(), a.halfextents); // Right
+	Vector2 aabbP1 = (a.min(), a.halfextentH); // Down
+	Vector2 aabbP2 = (a.max(), a.halfextentH); // Up
+	Vector2 aabbP3 = (a.min(), a.halfextentW); // Left
+	Vector2 aabbP4 = (a.max(), a.halfextentW); // Right
 
 	// finding each plane's distance to ray
 	//d1 = ;
@@ -63,8 +62,16 @@ CollisionData iTest(const AABB &a, const Ray &b)
 
 CollisionData iTest(const AABB  &a, const Plane  &b)
 {
-	CollisionData cd = b.normal * (a.position - b.position) <= ;
-	return cd;
+	// Separating AABB sides into planes
+	Vector2 aabbP1 = (a.min(), a.halfextentH); // Down
+	Vector2 aabbP2 = (a.max(), a.halfextentH); // Up
+	Vector2 aabbP3 = (a.min(), a.halfextentW); // Left
+	Vector2 aabbP4 = (a.max(), a.halfextentW); // Right
+		
+	CollisionData::depth = b.normal * (a.position - b.position) <= a.halfextentW * fabs(Vector2::dot(b.normal, aabbP4)) + a.halfextentH * fabs(Vector2::dot(b.normal, aabbP2));
+	return CollisionData::depth;
+
+	if (CollisionData::depth > 0) { CollisionData::result = true; }
 }
 
 CollisionData iTest(const Circle &a, const Circle &b)
@@ -78,3 +85,39 @@ CollisionData iTest(const Circle &a, const Circle &b)
 
 	return cd;
 }
+
+CollisionData iTest(const Circle &a, const Plane  &b)
+{
+	CollisionData::depth = b.normal * (a.position - b.position);
+
+	if (CollisionData::depth <= a.radius) { CollisionData::result = true; }
+}
+
+CollisionData iTest(const Circle &a, const Ray &b)
+{
+	double d = cosf(a.position - b.position) * b.direction;
+
+	// Closest point on ray to circle
+	double cp = b.position + b.direction * Vector2::clamp((a.position - b.position) * b.direction, 0, b.length);
+
+	if (cp <= a.radius) { CollisionData::result = true; }
+}
+
+CollisionData iTest(const Ray &a, const Plane &b)
+{
+	CollisionData cd = (b.normal * (b.position - a.position) / -(b.normal * a.direction));
+	bool canCollide = false;
+	if (-(b.normal * a.direction) > 0)
+	{
+		canCollide = true;
+	}
+
+	if (canCollide = true)
+	{
+		if (0 <= cd && cd >= a.length)
+		{
+			{ CollisionData::result = true; }
+		}
+	}
+}
+
