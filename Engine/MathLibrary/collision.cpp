@@ -50,6 +50,10 @@ CollisionData iTest(const AABB &a, Circle &b)
 
 CollisionData iTest(const AABB &a, const Ray &b)
 {
+	CollisionData cd;
+	int dH = -(a.halfextentH * b.direction);
+	int dW = -(a.halfextentW * b.direction);
+	bool canCollide;
 	// Separating AABB sides into planes
 	Vector2 aabbP1 = (a.min(), a.halfextentH); // Down
 	Vector2 aabbP2 = (a.max(), a.halfextentH); // Up
@@ -57,11 +61,25 @@ CollisionData iTest(const AABB &a, const Ray &b)
 	Vector2 aabbP4 = (a.max(), a.halfextentW); // Right
 
 	// finding each plane's distance to ray
-	//d1 = ;
+	double d1 = (a.halfextentH * (b.position * a.position)) / dH; // Down
+	double d2 = (a.halfextentH * (b.position * a.position)) / dH; // Up
+	double d3 = (a.halfextentW * (b.position * a.position)) / dW; // Left
+	double d4 = (a.halfextentW * (b.position * a.position)) / dW; // Right
+
+	if (dH != 0) { canCollide = false; }
+	if (dW != 0) { canCollide = false; }
+
+	if (canCollide = true)
+	{
+		//finding min and max distances of each AABB plane
+		/*double dMin = Vector2::min();
+		double dMax = Vector2::min();*/
+	}
 }
 
 CollisionData iTest(const AABB  &a, const Plane  &b)
 {
+	CollisionData cd;
 	// Separating AABB sides into planes
 	Vector2 aabbP1 = (a.min(), a.halfextentH); // Down
 	Vector2 aabbP2 = (a.max(), a.halfextentH); // Up
@@ -69,9 +87,9 @@ CollisionData iTest(const AABB  &a, const Plane  &b)
 	Vector2 aabbP4 = (a.max(), a.halfextentW); // Right
 		
 	CollisionData::depth = b.normal * (a.position - b.position) <= a.halfextentW * fabs(Vector2::dot(b.normal, aabbP4)) + a.halfextentH * fabs(Vector2::dot(b.normal, aabbP2));
-	return CollisionData::depth;
+	return cd.depth;
 
-	if (CollisionData::depth > 0) { CollisionData::result = true; }
+	if (CollisionData::depth > 0) { CollisionData::collide = true; }
 }
 
 CollisionData iTest(const Circle &a, const Circle &b)
@@ -81,26 +99,28 @@ CollisionData iTest(const Circle &a, const Circle &b)
 
 	cd.normal = Vector2::normal(diff);
 	cd.depth = (b.radius + a.radius) - diff.magnitude();
-	cd.result = cd.depth > 0;
+	cd.collide = cd.depth > 0;
 
 	return cd;
 }
 
 CollisionData iTest(const Circle &a, const Plane  &b)
 {
-	CollisionData::depth = b.normal * (a.position - b.position);
+	CollisionData cd;
+	cd.depth = b.normal * (a.position - b.position);
 
-	if (CollisionData::depth <= a.radius) { CollisionData::result = true; }
+	if (cd.depth <= a.radius) { cd.collide = true; }
 }
 
 CollisionData iTest(const Circle &a, const Ray &b)
 {
+	CollisionData cd;
 	double d = cosf(a.position - b.position) * b.direction;
 
 	// Closest point on ray to circle
 	double cp = b.position + b.direction * Vector2::clamp((a.position - b.position) * b.direction, 0, b.length);
 
-	if (cp <= a.radius) { CollisionData::result = true; }
+	if (cp <= a.radius) { cd.collide = true; }
 }
 
 CollisionData iTest(const Ray &a, const Plane &b)
@@ -116,7 +136,7 @@ CollisionData iTest(const Ray &a, const Plane &b)
 	{
 		if (0 <= cd && cd >= a.length)
 		{
-			{ CollisionData::result = true; }
+			{ cd.collide = true; }
 		}
 	}
 }

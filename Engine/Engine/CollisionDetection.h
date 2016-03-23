@@ -37,7 +37,7 @@ class CollisionDetection: public BinarySystem
 	void update(Handle<Entity> i, Handle<Entity> j) 
 	{
 		auto cd = EvaluateCollision(*i->transform, *i->collider, *j->transform, *j->collider);
-		if (cd.result)
+		if (cd.collide)
 		{
 			Collision::getData().push_back(Collision{ i,j, cd });
 		}
