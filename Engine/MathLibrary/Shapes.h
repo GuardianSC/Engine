@@ -10,7 +10,7 @@ struct ConvexHull { std::vector<Vector2> verts;                  };
 struct Ray        { Vector2 position, direction; float length;   };
 struct Plane      { Vector2 position, normal;                    };
 struct Circle     { Vector2 position; float radius;              };
-struct AABB { Vector2 position, halfextentW, halfextentH,  min() const, max() const; };
+struct AABB       { Vector2 position, halfextents,  min() const, max() const; };
 
 //Useful for taking a gameobject's transform and applying it to a shape for collision detection
 AABB        operator*(const Matrix3 &m, const AABB       &a);

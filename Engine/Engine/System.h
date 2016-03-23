@@ -9,7 +9,7 @@ class System
 {
 	virtual bool condition(Handle<Entity> i) = 0;
 	virtual void update(Handle<Entity> i) = 0;
-	virtual void onStep(Handle<Entity> i) = 0;
+	virtual void onStep(Handle<Entity> i) {};
 
 public:
 	void step()

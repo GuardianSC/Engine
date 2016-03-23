@@ -15,7 +15,7 @@ struct Vector2
 
 	Vector2 operator-(const Vector2 &rhs) const;
 
-	Vector2 operator*(float f) const;
+	Vector2 operator*(const float f) const;
 
 	Vector2 operator*(const Vector2 &rhs) const;
 
@@ -77,9 +77,9 @@ struct Vector2
 
 	Vector2 reflection(Vector2 &b);
 
-	Vector2 min(const Vector2 &a, const Vector2 &b);
+	static Vector2 min(const Vector2 &a, const Vector2 &b);
 
-	Vector2 max(const Vector2 &a, const Vector2 &b);
+	static Vector2 max(const Vector2 &a, const Vector2 &b);
 
 	static Vector2 clamp(const Vector2 &a, const Vector2 &a_min, const Vector2 &a_max);
 

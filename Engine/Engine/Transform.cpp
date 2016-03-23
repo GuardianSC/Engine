@@ -41,4 +41,4 @@ float Transform::getAngle() const { return angle; }
 
 Vector2 Transform::getRight() const { return Vector2::fromAngle(angle); }
 
-Vector2 Transform::getUp() const { return Vector2::perp(Vector2::fromAngle(angle)); }
+Vector2 Transform::getUp() const { return Vector2::perp((Vector2::fromAngle(angle))); }
