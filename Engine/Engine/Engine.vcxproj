@@ -114,8 +114,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>F:\Programming\AIE Projects\Engine\Engine\mathLibrary;%(AdditionalLibraryDirectories);lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>MathLibrary.lib;sfw.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>&amp;(SolutionDir)\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mathLibrary.lib;sfw.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>

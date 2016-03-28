@@ -29,17 +29,14 @@ CollisionData iTest(const AABB &a, const AABB &b)
 
 	return cdX.depth < cdY.depth ? cdX : cdY;
 
-	/*bool canCollide;
+	bool canCollide;
 
 	if (a.max < b.min || b.max < a.min) { canCollide = false; }
 
 	if (canCollide = true)
 	{
-		for each(AABB::min() && AABB::max())
-		{
-
-		}
-	}*/
+		a.max >= b.min;
+	}
 }
 
 CollisionData iTest(const AABB &a, Circle &b)
@@ -92,13 +89,14 @@ CollisionData iTest(const AABB &a, const Ray &b)
 CollisionData iTest(const AABB  &a, const Plane  &b)
 {
 	CollisionData cd;
+
 	// Separating AABB sides into planes
 	Vector2 aabbP1 = (a.min(), a.halfextents.y); // Down (Bottom)
 	Vector2 aabbP2 = (a.max(), a.halfextents.y); // Up (Top)
 	Vector2 aabbP3 = (a.min(), a.halfextents.x); // Left
 	Vector2 aabbP4 = (a.max(), a.halfextents.x); // Right
 	
-	CollisionData::depth = b.normal * (a.position - b.position) <= a.halfextents.x * fabs(b.normal * aabbP4) + a.halfextents.y * fabs(b.normal * aabbP2); 
+	cd.depth = b.normal * (a.position - b.position) <= a.halfextents.x * fabs(b.normal * aabbP4) + a.halfextents.y * fabs(b.normal * aabbP2); 
 	/*cd.depth = b.normal * (a.position - b.position) <= a.halfextents.y * fabs(Vector2::dot(b.normal, aabbP4)) + a.halfextents.y * fabs(Vector2::dot(b.normal, aabbP2)); Not sure if this or the line above*/
 	return cd.depth;
 
@@ -120,7 +118,7 @@ CollisionData iTest(const Circle &a, const Circle &b)
 CollisionData iTest(const Circle &a, const Plane  &b)
 {
 	CollisionData cd;
-	cd.depth = b.normal * (a.position - b.position);
+	cd.depth = Vector2::dot(b.normal, (a.position - b.position));
 
 	if (cd.depth <= a.radius) { cd.collide = true; }
 }
@@ -129,10 +127,11 @@ CollisionData iTest(const Circle &a, const Ray &b)
 {
 	CollisionData cd;
 	Vector2 O = { 0, 0 };
-	double d = cosf(a.position - b.position) * b.direction;
-
+	double d = cosf(Vector2::dot((a.position - b.position), b.direction));
+	// Clamp
+	double c = Vector2::clamp((a.position - b.position, d), b.length);
 	// Closest point on ray to circle
-	double cp = b.position + b.direction * Vector2::clamp((d, O, b.length));
+	double cp = b.position + b.direction * c;
 
 	if (cp <= a.radius) { cd.collide = true; }
 }
